@@ -1,0 +1,31 @@
+generated: '2026-08-12'
+method: generated
+source: openapi/findigs-client-api-openapi.yml + https://docs.getfindigs.com/
+note: >-
+  Agent Skills authored by API Evangelist over the published Findigs Client API contract. Every
+  operationId referenced was verified verbatim against
+  openapi/_original/findigs-client-api-openapi.json. Findigs publishes no skills, AGENTS.md or agent
+  guidance of its own; these are ours, and they are grounded only in operations that genuinely exist.
+skills:
+- file: findigs-publish-and-track-listing.md
+  name: Publish a Findigs listing and track its applications
+  description: >-
+    Create a rental listing, adjust it through the LISTED/LOCKED/CLOSED lifecycle, and follow the
+    application groups that arrive against it.
+  api: openapi/findigs-client-api-openapi.yml
+  operations:
+  - post_listing_listings__post
+  - get_listing_listings__listing_id__get
+  - patch_listing_listings__listing_id__patch
+  - get_groups_groups__get
+  - get_applications_applications__get
+- file: findigs-consume-decision-webhooks.md
+  name: Consume Findigs decision webhooks and reconcile state
+  description: >-
+    Receive the nine terse Findigs webhook events, respond 200 within the retry window, and call the
+    matching read operation to fetch authoritative state.
+  api: openapi/findigs-client-api-openapi.yml
+  operations:
+  - get_group_groups__group_id__get
+  - get_application_applications__application_id__get
+  - get_groups_groups__get

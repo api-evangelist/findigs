@@ -1,0 +1,62 @@
+generated: '2026-08-12'
+method: searched
+source: https://www.findigs.com/pricing
+currency: USD
+pricing_model: quote-only
+published_prices: false
+plan_count: 3
+note: >-
+  Findigs publishes NO list prices. The pricing page names three portfolio segments and states the two
+  inputs a quote is built from, but every tier is contact-sales. Quoted verbatim from the pricing
+  page: "Findigs prices every quote against two inputs: the units in your portfolio and the platform
+  pillars you turn on." The three segments below are recorded with price: null because that is what
+  the provider publishes — an honest null, not an unchecked field. All three segments are described as
+  full-platform; they differ by portfolio size and by the depth of implementation, support and
+  compliance controls, not by feature gating.
+basis:
+- units in the portfolio
+- which platform pillars are enabled (screening, underwriting, optimization, data)
+contract:
+  structure: >-
+    A single master service agreement bundling platform, integrations and the fraud guarantee;
+    contract structure is determined during the quote process.
+plans:
+- name: SMB
+  price: null
+  currency: USD
+  billing_period: contract
+  quote_only: true
+  unit_range: 100 to 3,000 units
+  included: Full platform access with standard setup and support.
+  url: https://www.findigs.com/solutions/smb
+- name: Mid-Market
+  price: null
+  currency: USD
+  billing_period: contract
+  quote_only: true
+  unit_range: 3,000 to 20,000 units
+  included: Full platform with dedicated implementation and customer success.
+  url: https://www.findigs.com/solutions/mid-market
+- name: Enterprise
+  price: null
+  currency: USD
+  billing_period: contract
+  quote_only: true
+  unit_range: 20,000+ units
+  included: Full platform with compliance controls, audit depth and a named account team.
+  url: https://www.findigs.com/solutions/enterprise
+api_access:
+  included_in_plans: false
+  note: >-
+    The Findigs Client API is not a priced or purchasable line item. Findigs states the API is not
+    available to new clients; existing integrators contact integrations@findigs.com. API keys are
+    issued by Findigs staff and there is no self-serve tier, free tier, trial or usage-based API
+    pricing of any kind.
+renter_fees:
+  findigs_charges_renters: false
+  statement: >-
+    "Renters apply through Findigs without paying Findigs directly." Application fees, where they
+    apply, are set by the property manager subject to jurisdiction rules.
+  reference: https://www.findigs.com/renters/application-fee
+evidence:
+- {url: 'https://www.findigs.com/pricing', status: 200}

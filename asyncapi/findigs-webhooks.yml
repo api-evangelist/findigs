@@ -1,0 +1,79 @@
+generated: '2026-08-12'
+method: searched
+source: https://docs.getfindigs.com/
+spec_type: none
+asyncapi_published: false
+note: >-
+  Findigs documents a real webhook surface but publishes NO AsyncAPI document — the event catalog
+  below is captured verbatim from the webhooks section of the published Findigs Client API
+  documentation. Findigs describes its webhooks as deliberately terse: the payload carries only the
+  object id, the event name and the event timestamp, and the integrator is expected to call the
+  corresponding GET operation to retrieve the updated object. Emitted as type Webhooks, not AsyncAPI.
+delivery:
+  transport: http
+  method: POST
+  subscription: >-
+    Not self-serve. The integrator provides Findigs with a URL configured to receive an HTTP POST
+    request; there is no webhook-management endpoint in the OpenAPI contract.
+  success_criteria: A 200 response from the client resource marks the webhook delivered.
+  retry:
+    policy: >-
+      If a 200 response is not received, Findigs retries the attempt up to 9 times over the 24 hours
+      following the first failed attempt.
+    max_attempts: 9
+    window: 24h
+  signing: not documented
+  ordering: not documented
+payload:
+  content_type: application/json
+  shape:
+    object_id: uuid of the object the event concerns
+    event_name: '"<object_type>.<event_name>"'
+    event_detail:
+      event_at: ISO 8601 timestamp of the event
+  example: |
+    {
+      "object_id": "45b7476b-262c-4b6c-91da-7d9b5ba83e5a",
+      "event_name": "object_type.event_name",
+      "event_detail": {
+        "event_at": "2022-11-17T17:51:57.628894"
+      }
+    }
+event_count: 9
+events:
+- name: applications.started
+  object: application
+  description: An applicant has begun a Findigs application.
+  follow_up: openapi/findigs-client-api-openapi.yml#get_application_applications__application_id__get
+- name: applications.submitted
+  object: application
+  description: An applicant has submitted their application.
+  follow_up: openapi/findigs-client-api-openapi.yml#get_application_applications__application_id__get
+- name: groups.ready_for_review
+  object: group
+  description: A group of applications is complete and ready for review.
+  follow_up: openapi/findigs-client-api-openapi.yml#get_group_groups__group_id__get
+- name: groups.approved
+  object: group
+  description: A group of applications has been approved.
+  follow_up: openapi/findigs-client-api-openapi.yml#get_group_groups__group_id__get
+- name: groups.declined
+  object: group
+  description: A group of applications has been declined.
+  follow_up: openapi/findigs-client-api-openapi.yml#get_group_groups__group_id__get
+- name: groups.cancelled
+  object: group
+  description: A group of applications has been cancelled.
+  follow_up: openapi/findigs-client-api-openapi.yml#get_group_groups__group_id__get
+- name: groups.decision_reversed
+  object: group
+  description: A previously rendered decision on a group has been reversed.
+  follow_up: openapi/findigs-client-api-openapi.yml#get_group_groups__group_id__get
+- name: groups.custom_status_changed
+  object: group
+  description: The operator-defined custom status (workflow_status) on a group has changed.
+  follow_up: openapi/findigs-client-api-openapi.yml#get_group_groups__group_id__get
+- name: groups.assigned_user_changed
+  object: group
+  description: The user assigned to review a group has changed.
+  follow_up: openapi/findigs-client-api-openapi.yml#get_group_groups__group_id__get

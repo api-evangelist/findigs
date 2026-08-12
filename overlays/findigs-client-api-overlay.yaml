@@ -1,0 +1,55 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Findigs Client API
+  version: 1.0.0
+extends: openapi/findigs-client-api-openapi.yml
+x-generated: '2026-08-12'
+x-method: generated
+x-source: >-
+  API Evangelist enrichment pass over the live OpenAPI 3.1.0 document served at
+  https://api.client.findigs.com/openapi.json. Captures our annotations WITHOUT mutating the
+  harvested original in openapi/_original/findigs-client-api-openapi.json.
+actions:
+- target: $.info
+  update:
+    x-apievangelist-profile: https://apievangelist.com/
+    x-apievangelist-harvested: '2026-08-12'
+    x-apievangelist-source: https://api.client.findigs.com/openapi.json
+    x-apievangelist-availability: >-
+      Findigs states this API is not available to new clients; existing customers continue as normal
+      and should contact integrations@findigs.com.
+    x-apievangelist-contact: integrations@findigs.com
+    x-apievangelist-data-classification: >-
+      Responses carry FCRA-regulated consumer report data and applicant PII — credit, criminal and
+      eviction ratings, gross monthly income, employer, name, email and phone.
+- target: $.info
+  update:
+    contact:
+      name: Findigs Integrations
+      email: integrations@findigs.com
+      url: https://docs.getfindigs.com/
+    termsOfService: https://www.findigs.com/legal/terms-of-use
+- target: $.components.securitySchemes.APIKeyHeader
+  update:
+    description: >-
+      Scoped API key issued directly by the Findigs team. Separate keys exist for the sandbox host
+      (api.sandbox.findigs.com) and the production host (api.client.findigs.com); there is no key
+      prefix distinguishing them. Not self-serve.
+- target: $.paths['/applications/'].get
+  update:
+    x-apievangelist-constraint: >-
+      The groups and listings query parameters are MUTUALLY EXCLUSIVE. Supplying both returns HTTP 400.
+      This constraint is stated in the operation description but is not expressible in the declared
+      responses, which list only 200 and 422.
+- target: $.paths['/listings/'].post
+  update:
+    x-apievangelist-sandbox-behaviour: >-
+      POSTing a listing to the sandbox host automatically generates applications and groups for it.
+    x-apievangelist-idempotency: >-
+      No idempotency key is supported. A retried create produces a duplicate listing, and in the
+      sandbox a duplicate application/group set with it.
+- target: $.tags
+  update:
+    x-apievangelist-note: >-
+      Three resource tags — Listings, Applications, Groups. Listings is the only writable resource;
+      Applications and Groups are read-only projections of the applicant-facing renter experience.

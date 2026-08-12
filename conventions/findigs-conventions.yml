@@ -1,0 +1,113 @@
+generated: '2026-08-12'
+method: searched
+source: https://docs.getfindigs.com/ + openapi/findigs-client-api-openapi.yml
+authentication:
+  style: api-key-header
+  header: X-API-KEY
+  scoped: true
+  statement: >-
+    "All endpoints documented here are accessed using a scoped API key, passed in a request header
+    X-API-KEY." Applied at the operation level on all 8 operations via security: [{APIKeyHeader: []}].
+  self_serve: false
+  cross_link: authentication/findigs-authentication.yml
+base_urls:
+  production: https://api.client.findigs.com
+  sandbox: https://api.sandbox.findigs.com
+  core_api: https://api.findigs.com
+  note: >-
+    One documented operation — Get Group Detail — deliberately crosses to a different base URL, the
+    Findigs Core API at api.findigs.com, described as retrieving data from the same source as the
+    Findigs UI. Integrators must handle two hosts with two credentials.
+idempotency:
+  supported: false
+  header: null
+  note: >-
+    NO idempotency contract. There is no Idempotency-Key header or equivalent parameter anywhere in
+    the spec or the documentation. The two write operations are POST /listings/ and PATCH
+    /listings/{listing_id}; a retried POST /listings/ will create a duplicate listing, and in the
+    sandbox will also generate a duplicate set of applications and groups. No Idempotency pointer is
+    emitted in apis.yml, because none is earned.
+pagination:
+  style: page-number
+  request_params:
+  - {name: page, in: query, type: integer, minimum: 1, default: 1}
+  - {name: size, in: query, type: integer, minimum: 1, maximum: 100, default: 50}
+  response_envelope:
+    schema: Page
+    fields:
+    - {name: items, type: array, description: the page of results}
+    - {name: total, type: integer, description: total matching records}
+    - {name: page, type: integer, description: current page number}
+    - {name: size, type: integer, description: page size}
+    - {name: pages, type: integer, description: total number of pages}
+  applies_to:
+  - get_listings_listings__get
+  - get_applications_applications__get
+  - get_groups_groups__get
+  note: >-
+    The Page schema description in the spec reads "Simple pagination class to replace
+    fastapi-pagination.Page". Cursor pagination is not offered; deep paging is page-number based.
+filtering:
+  time_windows:
+    params: [created_at__gte, created_at__lte, updated_at__gte, updated_at__lte]
+    format: date-time
+    note: >-
+      Django/DRF-style __gte / __lte suffixes. Listings support both created_at and updated_at
+      windows; groups support updated_at only; applications support neither.
+  id_sets:
+    note: >-
+      Repeated query parameters carrying comma-separated uuid sets — groups and listings on GET
+      /applications/, listing_ids on GET /groups/. On GET /applications/ the two sets are MUTUALLY
+      EXCLUSIVE and sending both is a 400.
+  status:
+    note: 'GET /groups/ accepts a repeated status parameter drawn from the GroupStatus enum.'
+field_expansion:
+  supported: true
+  style: boolean-embed-flag
+  params:
+  - {name: embed_bi_data, applies_to: [get_application_applications__application_id__get, get_group_groups__group_id__get], default: false, description: 'Retrieves BI data related to the application; populates the bi_data object.'}
+  note: >-
+    Not a general expand/fields mechanism — a single boolean opt-in for one embedded object. The
+    bi_data property is typed as an untyped object in the spec, so its shape is not contractual.
+sparse_fields:
+  supported: false
+metadata:
+  supported: false
+  note: >-
+    No customer-defined metadata bag. The nearest equivalents are operator-authored ancillary_questions
+    on an application (yes-no, file or text) and workflow_status, an operator-defined custom status on
+    a group.
+request_tracing:
+  request_id_header: not documented
+versioning:
+  cross_link: lifecycle/findigs-lifecycle.yml
+  scheme: none
+error_envelope:
+  media_type: application/json
+  problem_json: false
+  shape: '{"detail": [{"loc": [...], "msg": "...", "type": "..."}]}'
+  cross_link: errors/findigs-problem-types.yml
+  note: >-
+    Only 200 and 422 are declared per operation. Auth failure (403), the mutually-exclusive-query 400,
+    and any 404 or 5xx are undeclared, so the contract under-describes the real error surface.
+rate_limiting:
+  documented: false
+  cross_link: rate-limits/findigs-rate-limits.yml
+events:
+  style: webhooks
+  cross_link: asyncapi/findigs-webhooks.yml
+  note: >-
+    Webhooks are terse by design — object id, event name, timestamp — and the documented pattern is to
+    receive the event and then call the matching GET operation for the object's current state.
+identifiers:
+  format: uuid
+  note: >-
+    Listings, applications and groups are addressed by uuid. Path parameters are typed format: uuid;
+    on the Application and Group schemas the id fields are typed as plain strings, an internal
+    inconsistency in the spec.
+data_sensitivity:
+  note: >-
+    Response bodies carry consumer report data and PII — self_reported_data (name, email, phone),
+    current_employment_data (income, employer), credit_report_data (credit, criminal, eviction,
+    cautions) and mandatory_disclosures. Findigs states this data is handled under the FCRA. Agents
+    and integrations consuming this API are handling regulated consumer report information.

@@ -1,0 +1,228 @@
+generated: '2026-08-12'
+method: derived
+source: openapi/findigs-client-api-openapi.yml (components.schemas[*].example)
+description: Provider-authored request and response examples extracted verbatim from the schema-level example objects
+  of the live Findigs Client API OpenAPI 3.1.0 document. Findigs places examples on components.schemas rather than
+  on operation content, so tooling that only reads paths[*][*].responses[*].content[*].example will not see them
+  — this artifact surfaces them where an agent can find them. Nothing here is invented; every value is copied from
+  the published spec.
+note: The id, created_at and updated_at values in the Listing, Application and Group examples are regenerated server-side
+  on every fetch of /openapi.json — they are synthetic fixtures, not stable identifiers, and differ between the
+  sandbox and production copies of the spec. The literal values below are the ones present in the production spec
+  harvested on 2026-08-12. Findigs uses obviously fake placeholder data throughout (123 Fake St, NASA, Wernher Braun),
+  so no real applicant PII is embedded in the contract.
+example_count: 13
+coverage:
+  schemas_total: 22
+  schemas_with_examples: 13
+  schemas_without_examples:
+  - AncillaryQuestionType
+  - ApplicationStatus
+  - ApplicationType
+  - EmploymentType
+  - GroupStatus
+  - HTTPValidationError
+  - ListingStatus
+  - Page
+  - ValidationError
+  operation_level_examples: 0
+examples:
+- schema: AncillaryQuestion
+  source: openapi/findigs-client-api-openapi.yml#/components/schemas/AncillaryQuestion/example
+  example:
+    response: 'Yes'
+    questionText: Test question text for ancillary question
+    questionType: yes-no
+- schema: Application
+  source: openapi/findigs-client-api-openapi.yml#/components/schemas/Application/example
+  example:
+    id: cb0a635b-c422-4a3f-8679-015a1466c748
+    created_at: '2026-08-12T02:42:49.199599'
+    updated_at: '2026-08-12T02:42:49.199603'
+    listing_id: 6c27daea-cfb6-4117-b1c8-e98adab8ede5
+    group_id: 9878a491-94b0-4049-93b9-5625c9c7ed0a
+    type: applicant
+    status: completed
+    group_status: pending_review
+    self_reported_data:
+      first_name: Wernher
+      last_name: Braun
+      email: spaaaaace@nasa.gov
+      phone: '+4903012345678'
+    pet_data:
+    - age: 5
+      type: Dog
+      breed: Pug
+      weight: 15
+      is_service_animal: false
+    current_employment_data:
+      type: employed
+      income: 1234.56
+      company: NASA
+      position: Rocket Scientist
+      start_date: '1960-04-01'
+    credit_report_data:
+      credit: '540'
+      criminal: Pass
+      eviction: Pass
+      cautions: []
+    mandatory_disclosures:
+      qBankruptcy: false
+      qBreakLease: false
+      qDamage: false
+      qEvict: false
+      qFelony: false
+      qForeclosure: false
+      qNonPayment: false
+      qOutstandingJudgements: true
+      qRentersInsurance: false
+      qSection8: false
+      qSmoke: false
+- schema: CreditReportData
+  source: openapi/findigs-client-api-openapi.yml#/components/schemas/CreditReportData/example
+  example:
+    credit: '540'
+    criminal: Pass
+    eviction: Pass
+    cautions: []
+- schema: CurrentEmploymentData
+  source: openapi/findigs-client-api-openapi.yml#/components/schemas/CurrentEmploymentData/example
+  example:
+    type: employed
+    income: 1234.56
+    company: NASA
+    position: Rocket Scientist
+    start_date: '1960-04-01'
+- schema: Group
+  source: openapi/findigs-client-api-openapi.yml#/components/schemas/Group/example
+  example:
+    id: 0bdd37c8-4e8f-43b6-b899-5e8452019bfa
+    created_at: '2026-08-12T02:42:49.201207'
+    updated_at: '2026-08-12T02:42:49.201209'
+    listing_id: 8a10744e-0a39-4715-82df-92bf55b6834e
+    url: https://your-subdomain.findigs.com/group-applications/v2/groupid=7fe8e1a8-ad54-4855-86c8-3b2ac96fc1ca
+    group_status: pending_review
+    workflow_status: This is a string
+    applications:
+    - id: cb0a635b-c422-4a3f-8679-015a1466c748
+      created_at: '2026-08-12T02:42:49.199599'
+      updated_at: '2026-08-12T02:42:49.199603'
+      listing_id: 6c27daea-cfb6-4117-b1c8-e98adab8ede5
+      group_id: 9878a491-94b0-4049-93b9-5625c9c7ed0a
+      type: applicant
+      status: completed
+      group_status: pending_review
+      self_reported_data:
+        first_name: Wernher
+        last_name: Braun
+        email: spaaaaace@nasa.gov
+        phone: '+4903012345678'
+      pet_data:
+      - age: 5
+        type: Dog
+        breed: Pug
+        weight: 15
+        is_service_animal: false
+      current_employment_data:
+        type: employed
+        income: 1234.56
+        company: NASA
+        position: Rocket Scientist
+        start_date: '1960-04-01'
+      credit_report_data:
+        credit: '540'
+        criminal: Pass
+        eviction: Pass
+        cautions: []
+      mandatory_disclosures:
+        qBankruptcy: false
+        qBreakLease: false
+        qDamage: false
+        qEvict: false
+        qFelony: false
+        qForeclosure: false
+        qNonPayment: false
+        qOutstandingJudgements: true
+        qRentersInsurance: false
+        qSection8: false
+        qSmoke: false
+- schema: Listing
+  source: openapi/findigs-client-api-openapi.yml#/components/schemas/Listing/example
+  example:
+    id: 98054c1b-79b1-4d87-a1ee-89e001bd86a7
+    url: https://yoursubdomain.findigs.com/apply/unitid=98054c1b-79b1-4d87-a1ee-89e001bd86a7
+    created_at: '2026-08-12T02:42:49.205840'
+    updated_at: '2026-08-12T02:42:49.205842'
+    rent_amount: '6969.69'
+    date_available: '2021-04-20'
+    status: LISTED
+    address:
+      address_line_1: 123 Fake St
+      city: Melber
+      state: KY
+      postal_code: '42069'
+- schema: ListingAddress
+  source: openapi/findigs-client-api-openapi.yml#/components/schemas/ListingAddress/example
+  example:
+    address_line_1: 123 Fake St
+    city: Melber
+    state: KY
+    postal_code: '42069'
+- schema: ListingAddressResult
+  source: openapi/findigs-client-api-openapi.yml#/components/schemas/ListingAddressResult/example
+  example:
+    address_line_1: 123 Fake St
+    city: Melber
+    state: KY
+    postal_code: '42069'
+- schema: ListingCreate
+  source: openapi/findigs-client-api-openapi.yml#/components/schemas/ListingCreate/example
+  example:
+    rent_amount: '6969.69'
+    date_available: '2021-04-20'
+    status: LISTED
+    address:
+      address_line_1: 123 Fake St
+      city: Melber
+      state: KY
+      postal_code: '42069'
+- schema: ListingUpdate
+  source: openapi/findigs-client-api-openapi.yml#/components/schemas/ListingUpdate/example
+  example:
+    rent_amount: '6969.69'
+    date_available: '2021-04-20'
+    status: LISTED
+    address:
+      address_line_1: 123 Fake St
+      city: Melber
+      state: KY
+      postal_code: '42069'
+- schema: MandatoryDisclosures
+  source: openapi/findigs-client-api-openapi.yml#/components/schemas/MandatoryDisclosures/example
+  example:
+    qBankruptcy: false
+    qBreakLease: false
+    qDamage: false
+    qEvict: false
+    qFelony: false
+    qForeclosure: false
+    qNonPayment: false
+    qOutstandingJudgements: true
+    qRentersInsurance: false
+    qSection8: false
+    qSmoke: false
+- schema: PetData
+  source: openapi/findigs-client-api-openapi.yml#/components/schemas/PetData/example
+  example:
+    age: 5
+    type: Dog
+    breed: Pug
+    weight: 15
+    is_service_animal: false
+- schema: SelfReportedData
+  source: openapi/findigs-client-api-openapi.yml#/components/schemas/SelfReportedData/example
+  example:
+    first_name: Wernher
+    last_name: Braun
+    email: spaaaaace@nasa.gov
+    phone: '+4903012345678'

@@ -1,0 +1,93 @@
+generated: '2026-08-12'
+method: derived
+source: openapi/findigs-client-api-openapi.yml
+description: >-
+  Entity-relationship graph derived from the components.schemas $ref links and the id-reference fields
+  of the Findigs Client API OpenAPI 3.1.0 document. The model is a three-level funnel: a Listing is a
+  unit accepting applications for a window of time; a Group is the set of people applying together for
+  that listing and is the unit that gets DECIDED; an Application is one person's submission inside a
+  group. Everything else hangs off Application as an embedded value object.
+identifiers:
+  format: uuid
+  note: >-
+    Path parameters are typed format uuid; Listing.id is format uuid while Application.id and
+    Group.id are typed format uuid4. No prefixed or human-readable id scheme.
+entities:
+- name: Listing
+  schema: Listing
+  root: true
+  description: >-
+    The window of time during which a unit (a physical location) accepts rental applications. Findigs
+    manages the underlying unit and property objects behind this resource; they are not exposed.
+  operations: [get_listings_listings__get, post_listing_listings__post, get_listing_listings__listing_id__get, patch_listing_listings__listing_id__patch]
+  writable: true
+  create_schema: ListingCreate
+  update_schema: ListingUpdate
+  fields: [rent_amount, date_available, status, address, url, id, created_at, updated_at]
+  enums: {status: ListingStatus}
+- name: Group
+  schema: Group
+  description: >-
+    A collection of applications and the attributes describing that collection. This is the decision
+    unit — approval, decline and reversal happen at group level, and eight of the nine published
+    webhook events are group events.
+  operations: [get_groups_groups__get, get_group_groups__group_id__get]
+  writable: false
+  fields: [listing_id, url, status, workflow_status, desired_move_in_date, decline_details, applications, id, created_at, updated_at, bi_data]
+  enums: {status: GroupStatus}
+- name: Application
+  schema: Application
+  description: >-
+    All data relevant to one applicant's effort to secure housing through a Findigs application,
+    including consumer report data. Carries a denormalized copy of its group's status.
+  operations: [get_applications_applications__get, get_application_applications__application_id__get]
+  writable: false
+  fields: [listing_id, group_id, type, status, group_status, self_reported_data, pet_data, current_employment_data, credit_report_data, mandatory_disclosures, ancillary_questions, id, created_at, updated_at, bi_data]
+  enums: {type: ApplicationType, status: ApplicationStatus, group_status: GroupStatus}
+value_objects:
+- {name: ListingAddress, used_by: [ListingCreate, ListingUpdate], note: 'request-side address; state is a 2-letter code, postal_code matches ^[0-9]{5}(?:-[0-9]{4})?$'}
+- {name: ListingAddressResult, used_by: [Listing], note: 'response-side address; all constraints relaxed to plain strings'}
+- {name: SelfReportedData, used_by: [Application], note: 'unverified applicant-entered first_name, last_name, email, phone (E.164 pattern)'}
+- {name: CurrentEmploymentData, used_by: [Application], note: 'gross monthly income, company, position, start_date; type is EmploymentType'}
+- {name: CreditReportData, used_by: [Application], note: 'credit is a 3-digit string (^[0-9]{3}$), plus criminal and eviction ratings and a cautions[] list of human-readable flags. Regulated consumer report data.'}
+- {name: MandatoryDisclosures, used_by: [Application], note: '11 booleans — qBankruptcy, qBreakLease, qDamage, qEvict, qFelony, qForeclosure, qNonPayment, qOutstandingJudgements, qRentersInsurance, qSection8, qSmoke'}
+- {name: PetData, used_by: [Application], note: 'repeated; type, breed, weight required, plus age and is_service_animal'}
+- {name: AncillaryQuestion, used_by: [Application], note: 'operator-authored custom questions; questionType is AncillaryQuestionType (yes-no, file, text)'}
+- {name: Page, used_by: [get_listings_listings__get, get_applications_applications__get, get_groups_groups__get], note: 'pagination envelope {items,total,page,size,pages}'}
+- {name: HTTPValidationError, used_by: [all operations], note: 'wraps ValidationError[] on 422'}
+relationships:
+- {from: Group, to: Listing, kind: belongs_to, via: listing_id, evidence: 'Group.listing_id (uuid4) — "ID of the listing"'}
+- {from: Application, to: Listing, kind: belongs_to, via: listing_id, evidence: 'Application.listing_id (uuid4)'}
+- {from: Application, to: Group, kind: belongs_to, via: group_id, evidence: 'Application.group_id (uuid4) — "ID of the group"'}
+- {from: Group, to: Application, kind: has_many, via: applications, evidence: 'Group.applications is an array of $ref Application — embedded, not a link'}
+- {from: Listing, to: Group, kind: has_many, via: listing_id, evidence: 'GET /groups/?listing_ids= selects groups by listing'}
+- {from: Listing, to: Application, kind: has_many, via: listing_id, evidence: 'GET /applications/?listings= selects applications by listing'}
+- {from: Application, to: PetData, kind: has_many, via: pet_data, evidence: 'array of $ref PetData'}
+- {from: Application, to: AncillaryQuestion, kind: has_many, via: ancillary_questions, evidence: 'array of $ref AncillaryQuestion'}
+- {from: Application, to: SelfReportedData, kind: has_one, via: self_reported_data, evidence: $ref}
+- {from: Application, to: CurrentEmploymentData, kind: has_one, via: current_employment_data, evidence: $ref}
+- {from: Application, to: CreditReportData, kind: has_one, via: credit_report_data, evidence: $ref}
+- {from: Application, to: MandatoryDisclosures, kind: has_one, via: mandatory_disclosures, evidence: $ref}
+- {from: Listing, to: ListingAddressResult, kind: has_one, via: address, evidence: $ref}
+enumerations:
+- {name: ListingStatus, values: [LISTED, LOCKED, CLOSED], note: 'LISTED appears in search and accepts applications; LOCKED does not appear in search but accepts applications; CLOSED does neither'}
+- {name: ApplicationStatus, values: [in_progress, completed, accepted]}
+- {name: GroupStatus, values: [incomplete, submitted, passed, pending_review, declined, approved, onboarded, cancelled]}
+- {name: ApplicationType, values: [applicant, guarantor]}
+- {name: EmploymentType, values: [employed, offer, offer_letter, own, self_employed, student, not, other, benefits, retired]}
+- {name: AncillaryQuestionType, values: [yes-no, file, text]}
+notes:
+- >-
+  Application.group_status denormalizes Group.status onto the child, so the same fact appears in two
+  places and a consumer reading an application list sees group state without a second call.
+- >-
+  bi_data on both Application and Group is declared as an untyped object gated behind the
+  embed_bi_data query flag. Its contents are not described in the contract.
+- >-
+  Group.decline_details is an untyped object described only as "decline reasons yo" — a truncated
+  description in the published spec. There is no enumerated decline-reason vocabulary, so the adverse
+  action reasoning is not machine-readable.
+- >-
+  The write surface is Listing only. Applications and groups are read-only over the API; they are
+  created by applicants through the Findigs renter experience, or auto-generated in the sandbox when a
+  listing is POSTed.

@@ -1,23 +1,162 @@
 aid: findigs
 name: Findigs
-description: 'Findigs is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  Findigs is a New York City based residential real estate decisioning platform that screens rental
+  applicants for identity, income, employment, credit, criminal history, eviction records, documents
+  and pets, then applies automated underwriting against each operator's own written policy criteria to
+  render a full yes/no decision on every rental application rather than handing back raw screening
+  reports. The platform spans screening, underwriting, policy optimization and post-lease performance
+  data, is backed by a contractual fraud guarantee, and reports a median decision time of 3.4 hours
+  across 400K+ rental units. Findigs publishes a machine-readable Client API — an OpenAPI 3.1.0
+  contract served from api.client.findigs.com covering listings, applications and applicant groups,
+  authenticated with a scoped X-API-KEY header and paired with a sandbox environment and a terse
+  webhook event surface — though the company states the Client API is closed to new clients and
+  existing integrators should contact integrations@findigs.com.
+image: https://www.findigs.com/opengraph-image?title=Resident%20screening%20and%20rental%20decisioning%20%7C%20Findigs&variant=home
 url: https://raw.githubusercontent.com/api-evangelist/findigs/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
-specificationVersion: '0.20'
+specificationVersion: '0.21'
 created: '2026-08-12'
 modified: '2026-08-12'
 tags:
-- Company
-apis: []
+- rental-screening
+- tenant-screening
+- resident-screening
+- rental-application
+- underwriting
+- decisioning
+- identity-verification
+- income-verification
+- credit-check
+- background-check
+- fraud-detection
+- property-management
+- real-estate
+- proptech
+- fcra
+- fair-housing
+- webhooks
+apis:
+- name: Findigs Client API
+  description: >-
+    REST API for programmatic interaction with Findigs and integration of Findigs data into existing
+    property management systems and workflows. Covers listings (the window during which a unit accepts
+    rental applications), applications (an individual applicant's submission, including self-reported
+    data, employment, credit report data, mandatory disclosures, pet data and ancillary questions) and
+    groups (a collection of applications decisioned together). Authenticated with a scoped API key in
+    the X-API-KEY header, with separate sandbox and production environments. Findigs states this API is
+    not available to new clients; existing customers may continue and should contact
+    integrations@findigs.com.
+  humanURL: https://docs.getfindigs.com/
+  baseURL: https://api.client.findigs.com
+  tags:
+  - rental-screening
+  - rental-application
+  - underwriting
+  - decisioning
+  - property-management
+  - proptech
+  - webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/findigs-client-api-openapi.yml
+  - type: APIReference
+    url: https://docs.getfindigs.com/
+  - type: Documentation
+    url: https://docs.getfindigs.com/
+  - type: Postman
+    url: https://docs.getfindigs.com/
+  - type: Overlay
+    url: overlays/findigs-client-api-overlay.yaml
+  - type: Authentication
+    url: authentication/findigs-authentication.yml
+  - type: Conventions
+    url: conventions/findigs-conventions.yml
+  - type: DataModel
+    url: data-model/findigs-data-model.yml
+  - type: ErrorCatalog
+    url: errors/findigs-problem-types.yml
+  - type: Webhooks
+    url: asyncapi/findigs-webhooks.yml
+  - type: Sandbox
+    url: sandbox/findigs-sandbox.yml
+  - type: Examples
+    url: examples/findigs-client-api-examples.yml
+  - type: RateLimits
+    url: rate-limits/findigs-rate-limits.yml
+common:
+- type: Website
+  url: https://www.findigs.com/
+- type: DeveloperPortal
+  url: https://docs.getfindigs.com/
+- type: Documentation
+  url: https://docs.getfindigs.com/
+- type: APIReference
+  url: https://docs.getfindigs.com/
+- type: Postman
+  url: https://docs.getfindigs.com/
+- type: OpenAPI
+  url: openapi/findigs-client-api-openapi.yml
+- type: Blog
+  url: https://www.findigs.com/blog
+- type: GitHubOrganization
+  url: https://github.com/Findigs
+- type: Support
+  url: https://www.findigs.com/renters
+- type: Login
+  url: https://app.findigs.com/login
+- type: Pricing
+  url: https://www.findigs.com/pricing
+- type: TermsOfService
+  url: https://www.findigs.com/legal/terms-of-use
+- type: PrivacyPolicy
+  url: https://www.findigs.com/legal/privacy-policy
+- type: Security
+  url: https://www.findigs.com/legal/responsible-disclosure-policy
+- type: VulnerabilityDisclosure
+  url: security/findigs-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/findigs-domain-security.yml
+- type: Authentication
+  url: authentication/findigs-authentication.yml
+- type: Conventions
+  url: conventions/findigs-conventions.yml
+- type: Conformance
+  url: conformance/findigs-conformance.yml
+- type: ErrorCatalog
+  url: errors/findigs-problem-types.yml
+- type: DataModel
+  url: data-model/findigs-data-model.yml
+- type: Lifecycle
+  url: lifecycle/findigs-lifecycle.yml
+- type: Webhooks
+  url: asyncapi/findigs-webhooks.yml
+- type: Sandbox
+  url: sandbox/findigs-sandbox.yml
+- type: Packages
+  url: packages/findigs-packages.yml
+- type: Plans
+  url: plans/findigs-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/findigs-rate-limits.yml
+- type: Examples
+  url: examples/findigs-client-api-examples.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: AgenticAccess
+  url: agentic-access/findigs-agentic-access.yml
+- type: LLMsTxt
+  url: llms/findigs-llms.txt
+- type: Overlay
+  url: overlays/findigs-client-api-overlay.yaml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
-common:
-- type: Website
-  url: https://www.nasdaqprivatemarket.com/
+x-enrichment:
+  date: '2026-08-12'
+  status: enriched
+  artifacts_added: 25
+  pass: local-v1

@@ -1,0 +1,51 @@
+generated: '2026-08-12'
+method: searched
+source: https://docs.getfindigs.com/ + openapi/findigs-client-api-openapi.yml
+published: true
+separation:
+  model: separate-host
+  note: >-
+    Findigs separates test from live by HOST, not by key prefix. The same OpenAPI document declares
+    both environments in servers[], and the same X-API-KEY scheme is used against each with a
+    different key. There is no documented key prefix that lets an integrator tell a sandbox key from a
+    production key by inspection.
+environments:
+- name: Sandbox Environment
+  base_url: https://api.sandbox.findigs.com
+  alias: https://sandbox.findigs.com
+  spec: https://api.sandbox.findigs.com/openapi.json
+  interactive_docs:
+  - https://api.sandbox.findigs.com/docs
+  - https://api.sandbox.findigs.com/redoc
+- name: Live Production Environment
+  base_url: https://api.client.findigs.com
+  spec: https://api.client.findigs.com/openapi.json
+  interactive_docs:
+  - https://api.client.findigs.com/docs
+  - https://api.client.findigs.com/redoc
+credentials:
+  self_serve: false
+  how_to_obtain: >-
+    "Please reach out to the Findigs team directly for sandbox and production keys." Keys are issued
+    by Findigs staff; there is no signup, console or key-management endpoint. Because the Client API
+    is closed to new clients, sandbox access is in practice limited to existing integrators.
+  header: X-API-KEY
+fixtures:
+  auto_generation:
+    trigger: POST /listings/
+    behaviour: >-
+      "When a listing is POSTed to the sandbox, applications and groups will automatically be
+      generated for it." This is the primary fixture mechanism — the sandbox manufactures a populated
+      application funnel from a single listing create, so an integrator can exercise the read paths
+      and the group decisioning statuses without a real applicant.
+    source_operation: openapi/findigs-client-api-openapi.yml#post_listing_listings__post
+  magic_values: none published
+  test_clock: none published
+  trigger_tooling: none published
+note: >-
+  No test identities, test credit scores, test documents or decline-simulation values are published.
+  The status enums an integrator can exercise are the real ones declared in the spec — ListingStatus
+  (LISTED, LOCKED, CLOSED), ApplicationStatus (in_progress, completed, accepted) and GroupStatus
+  (incomplete, submitted, passed, pending_review, declined, approved, onboarded, cancelled) — but
+  Findigs does not document how to drive a sandbox group into a chosen terminal status. Nothing here
+  is invented; every value is read from the published spec or the published documentation.

@@ -1,0 +1,24 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  Registry searches against npm, PyPI, RubyGems, crates.io, Packagist, NuGet and pkg.go.dev, plus the
+  Findigs Client API documentation at https://docs.getfindigs.com/ and the GitHub org
+  https://github.com/Findigs
+package_count: 0
+packages: []
+note: >-
+  Findigs publishes NO first-party client libraries in any public package registry. Searched
+  registry.npmjs.org (0 results for "findigs"), pypi.org (findigs / findigs-api / findigs-client all
+  404), rubygems.org (404), crates.io, Packagist and the NuGet query API (0 hits) — all on
+  2026-08-12. The public GitHub organization github.com/Findigs exposes a single repository and no
+  SDK. The published Findigs Client API documentation at docs.getfindigs.com is a Postman Documenter
+  collection offering generated code snippets (C#, cURL and others) rather than a maintained SDK, so
+  integrators call the REST contract directly. No SDKs pointer is emitted in apis.yml because there is
+  no official client library to point at.
+registries_checked:
+- {registry: npm, endpoint: 'https://registry.npmjs.org/-/v1/search?text=findigs', result: 0 packages}
+- {registry: pypi, endpoint: 'https://pypi.org/pypi/findigs/json', result: 404}
+- {registry: rubygems, endpoint: 'https://rubygems.org/api/v1/gems/findigs.json', result: 404}
+- {registry: nuget, endpoint: 'https://azuresearch-usnc.nuget.org/query?q=findigs', result: 0 hits}
+- {registry: crates.io, endpoint: 'https://crates.io/api/v1/crates?q=findigs', result: no matching crate}
+- {registry: packagist, endpoint: 'https://packagist.org/search.json?q=findigs', result: no matching package}

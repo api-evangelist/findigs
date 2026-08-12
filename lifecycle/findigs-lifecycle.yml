@@ -1,0 +1,65 @@
+generated: '2026-08-12'
+method: searched
+source: https://docs.getfindigs.com/ + openapi/findigs-client-api-openapi.yml
+versioning:
+  scheme: none
+  current: 0.1.0
+  note: >-
+    info.version is 0.1.0 and there is no version segment in any path, no version header, and no
+    date-based version train. The base host itself (api.client.findigs.com) carries no version prefix.
+    The one operation that reaches the separate Core API — Get Group Detail on api.findigs.com — is
+    referred to in the collection variables as cav1BaseUrl, implying a v1 Core API, but that is not
+    expressed in the path.
+availability:
+  status: closed-to-new-clients
+  statement: >-
+    "Note: this API is not available to new clients. Customers already using the Findigs Client API
+    can continue as normal. Reach out to integrations@findigs.com with any questions regarding this
+    service."
+  source: https://docs.getfindigs.com/
+  note: >-
+    This is the single most important lifecycle fact about the Findigs Client API. The contract is
+    live, machine-readable and publicly served at api.client.findigs.com/openapi.json, but the
+    developer program behind it is closed: no self-serve signup exists, keys are issued by Findigs
+    staff, and new integrators are not accepted. Findigs has not stated a sunset date, so this is a
+    closed program rather than an announced deprecation.
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  note: >-
+    No deprecation policy is published, no RFC 8594 Sunset or Deprecation header is documented, and no
+    operation in the spec carries deprecated: true. No Deprecation pointer is emitted in apis.yml
+    because there is no published policy to point at.
+deprecated_operations: []
+status_page:
+  url: null
+  published: false
+  note: >-
+    No status page. status.findigs.com resolves but is a wildcard catch-all that 302s to
+    https://app.findigs.com/login?redirectTo=%2Fdashboard — the application login, not a status
+    dashboard. The same is true of trust.findigs.com and security.findigs.com. No StatusPage pointer
+    is emitted in apis.yml: a login redirect is not a status page, and crediting one would be false.
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    No public SLA. Findigs publishes an operational metric — a median decision time of 3.4 hours from
+    application submission — but that is a product performance claim, not an API availability
+    commitment.
+changelog:
+  url: null
+  published: false
+  note: >-
+    No dated changelog for the Client API. https://www.findigs.com/changelog returns 404 and the
+    sitemap contains no changelog or release-notes page. No ChangeLog pointer is emitted.
+support:
+  api_contact: integrations@findigs.com
+  security_contact: security@findigs.com
+  renter_help_center: https://www.findigs.com/renters
+evidence:
+- {url: 'https://docs.getfindigs.com/', status: 200, finding: closed-to-new-clients notice + API reference}
+- {url: 'https://api.client.findigs.com/openapi.json', status: 200, finding: 'live OpenAPI 3.1.0, info.version 0.1.0'}
+- {url: 'https://status.findigs.com', status: 200, finding: '302 to https://app.findigs.com/login — wildcard catch-all, not a status page'}
+- {url: 'https://www.findigs.com/changelog', status: 404, finding: no changelog}

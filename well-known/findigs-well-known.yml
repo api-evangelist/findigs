@@ -1,0 +1,57 @@
+generated: '2026-08-12'
+method: probed
+source: live GET of /.well-known/* on every Findigs host in apis.yml and OpenAPI servers[]
+note: >-
+  Every /.well-known/ path returned 404 on every Findigs host probed. No WellKnown or SecurityTxt
+  pointer is emitted in apis.yml, because this file records an ABSENCE, not a served surface.
+  Findigs does publish a responsible disclosure policy and a security contact, but as an HTML page at
+  https://www.findigs.com/legal/responsible-disclosure-policy — not as an RFC 9116 security.txt. The
+  security contact is independently corroborated by the findigs.com CAA record
+  `0 iodef "mailto:security@findigs.com"`. Note the marketing hosts return a 404 HTML shell (Next.js
+  error page) rather than an SPA 200 catch-all, so these are true negatives.
+hosts:
+- host: https://www.findigs.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+- host: https://findigs.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+- host: https://api.client.findigs.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+- host: https://api.findigs.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+- host: https://docs.findigs.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+- host: https://developer.findigs.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}

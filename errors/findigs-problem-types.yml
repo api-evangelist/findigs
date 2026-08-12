@@ -1,0 +1,81 @@
+generated: '2026-08-12'
+method: derived
+source: openapi/findigs-client-api-openapi.yml + https://docs.getfindigs.com/ + live probes of api.client.findigs.com
+format: fastapi-validation-error
+media_type: application/json
+note: >-
+  The Findigs Client API does NOT use RFC 9457 application/problem+json. Every operation in the spec
+  declares exactly two responses — 200 and 422 — and the 422 body is the FastAPI/Pydantic
+  HTTPValidationError envelope. The 400 and 403 entries below are documented behaviour observed
+  outside the spec's responses map: the 403 was observed live on an unauthenticated request, and the
+  400 is stated in the Get Applications description. The spec under-declares its error surface: no
+  401, 403, 404, 429 or 5xx response is declared on any operation, so an agent reading only the
+  contract cannot anticipate auth failure or a missing resource.
+envelope:
+  validation:
+    field: detail
+    shape: 'array of {loc: [string], msg: string, type: string}'
+    schema: HTTPValidationError
+  generic:
+    field: detail
+    shape: string or array of string
+problems:
+- status: 422
+  name: HTTPValidationError
+  title: Validation Error
+  detail: >-
+    Request failed Pydantic validation. detail[] carries one entry per invalid field with loc (the
+    JSON path to the offending field), msg (human-readable message) and type (the validation rule
+    that failed).
+  media_type: application/json
+  schema: '#/components/schemas/HTTPValidationError'
+  remediation: >-
+    Read detail[].loc to identify the offending parameter or body field and correct it. Common causes
+    are a malformed uuid path parameter, size above the 100 maximum, page below 1, or a status value
+    outside the declared enum.
+  source_operations:
+  - openapi/findigs-client-api-openapi.yml#get_listings_listings__get
+  - openapi/findigs-client-api-openapi.yml#post_listing_listings__post
+  - openapi/findigs-client-api-openapi.yml#get_listing_listings__listing_id__get
+  - openapi/findigs-client-api-openapi.yml#patch_listing_listings__listing_id__patch
+  - openapi/findigs-client-api-openapi.yml#get_applications_applications__get
+  - openapi/findigs-client-api-openapi.yml#get_application_applications__application_id__get
+  - openapi/findigs-client-api-openapi.yml#get_groups_groups__get
+  - openapi/findigs-client-api-openapi.yml#get_group_groups__group_id__get
+- status: 403
+  name: NotAuthenticated
+  title: Not authenticated
+  detail: '{"detail":"Not authenticated"}'
+  media_type: application/json
+  declared_in_spec: false
+  remediation: >-
+    Supply a valid scoped API key in the X-API-KEY request header. Sandbox and production keys are
+    issued by the Findigs team directly and are not self-serve.
+  evidence: >-
+    Observed live on 2026-08-12 — GET https://api.client.findigs.com/listings/ with no key returned
+    HTTP 403 with this body.
+- status: 400
+  name: MutuallyExclusiveQuery
+  title: Mutually exclusive query parameters
+  detail: >-
+    Get Applications accepts two optional CSV id sets, groups and listings, which are mutually
+    exclusive. Querying by both a group_id and a listing_id at once is a 400.
+  media_type: application/json
+  declared_in_spec: false
+  remediation: Send either groups or listings, never both, on GET /applications/.
+  source_operations:
+  - openapi/findigs-client-api-openapi.yml#get_applications_applications__get
+  evidence: >-
+    Stated verbatim in the Get Applications operation description in the published Findigs Client API
+    documentation at https://docs.getfindigs.com/.
+- status: 401
+  name: CoreAPIUnauthenticated
+  title: Authentication credentials were not provided
+  detail: '{"detail":["Authentication credentials were not provided."]}'
+  media_type: application/json
+  declared_in_spec: false
+  host: https://api.findigs.com
+  remediation: >-
+    Applies to the separate Findigs Core API host (api.findigs.com), which backs the Get Group Detail
+    operation. Credentials for that host are issued separately by Findigs.
+  evidence: 'Observed live on 2026-08-12 — GET https://api.findigs.com/ returned HTTP 401 with this body.'

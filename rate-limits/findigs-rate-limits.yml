@@ -1,0 +1,25 @@
+generated: '2026-08-12'
+method: searched
+source: https://docs.getfindigs.com/ + openapi/findigs-client-api-openapi.yml
+limit_count: 0
+limits: []
+headers: []
+exhaustion_status: null
+note: >-
+  Findigs publishes NO rate limits for the Client API. The published API reference at
+  docs.getfindigs.com contains no rate-limit, throttling, quota or Retry-After language, and the live
+  OpenAPI 3.1.0 document declares only 200 and 422 responses on every operation — no 429 anywhere.
+  No X-RateLimit-*, RateLimit-* or Retry-After response header is documented. This is an honest zero,
+  not an unchecked field: an integrating agent has no published runtime signal telling it when to back
+  off, and must treat throttling behaviour as undiscoverable until it is observed in production.
+  Limits could not be observed live either, because every endpoint requires a scoped API key that is
+  issued only by Findigs staff (GET https://api.client.findigs.com/listings/ returns 403 Not
+  authenticated unauthenticated), so no unauthenticated response carrying rate-limit headers exists.
+pagination_bound:
+  note: >-
+    The only published request-volume constraint is the pagination ceiling, which is a page-size cap
+    rather than a rate limit: size has maximum 100 and default 50 on all three collection operations.
+evidence:
+- {url: 'https://docs.getfindigs.com/', status: 200, finding: no rate-limit section in the published API reference}
+- {url: 'https://api.client.findigs.com/openapi.json', status: 200, finding: 'no 429 response and no rate-limit header declared on any of the 8 operations'}
+- {url: 'https://api.client.findigs.com/listings/', status: 403, finding: '{"detail":"Not authenticated"} — no rate-limit headers on the unauthenticated response'}
