@@ -1,0 +1,309 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Findigs Client API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Listings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Listings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.findigs.com/listings/",
+            "params": [
+              {
+                "name": "created_at__gte",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at__lte",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "updated_at__gte",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "updated_at__lte",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-KEY",
+              "value": "{{X-API-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Fetch all listings"
+        },
+        {
+          "info": {
+            "name": "Post Listing",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.findigs.com/listings/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-KEY",
+              "value": "{{X-API-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a listing with all the information:\n\n- **url**: Each listing must have a url\n- **rent_amount**: The rent in dollars as a decimal\n- **date_available**: Date the listing is first available for move in.\n- **status**: A required status\n- **address**: The physical address of the listing\n\n**Sandbox**\n\nWhen a listing is POSTed to the sandbox, applications and groups will\nautomatically be generated for it."
+        },
+        {
+          "info": {
+            "name": "Get Listing",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.findigs.com/listings/:listing_id",
+            "params": [
+              {
+                "name": "listing_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-KEY",
+              "value": "{{X-API-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a specific listing by id (or external_id in the future?)"
+        },
+        {
+          "info": {
+            "name": "Patch Listing",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.sandbox.findigs.com/listings/:listing_id",
+            "params": [
+              {
+                "name": "listing_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-KEY",
+              "value": "{{X-API-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "PATCH update the listing specified.\nAll fields in the body are optional, and only those provided will be set."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.findigs.com/applications/",
+            "params": [
+              {
+                "name": "groups",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of group_ids to select Applications by"
+              },
+              {
+                "name": "listings",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of listing_ids to select Applications by"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-KEY",
+              "value": "{{X-API-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get all applications matching the given query.\nParts of the query are two optional CSV id sets, which are mutually exclusive\nYou cannot query by both a group_id and a listing_id at once, to do so is a 400."
+        },
+        {
+          "info": {
+            "name": "Get Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.findigs.com/applications/:application_id",
+            "params": [
+              {
+                "name": "application_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "embed_bi_data",
+                "value": "",
+                "type": "query",
+                "description": "Retrieves BI data related to the application."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-KEY",
+              "value": "{{X-API-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Endpoint to retrieve an individual application by its id"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.findigs.com/groups/",
+            "params": [
+              {
+                "name": "listing_ids",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of listing_ids to select Groups by"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status for group of applications"
+              },
+              {
+                "name": "updated_at__gte",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "updated_at__lte",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-KEY",
+              "value": "{{X-API-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get Groups"
+        },
+        {
+          "info": {
+            "name": "Get Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.findigs.com/groups/:group_id",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the group to retrieve"
+              },
+              {
+                "name": "embed_bi_data",
+                "value": "",
+                "type": "query",
+                "description": "Retrieves BI data related to the application."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-KEY",
+              "value": "{{X-API-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get Group"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

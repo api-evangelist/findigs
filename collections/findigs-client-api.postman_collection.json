@@ -1,0 +1,1633 @@
+{
+  "item": [
+    {
+      "id": "ac80b6a5-19d7-49d4-bdff-1b5d618d475e",
+      "name": "Listings",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fe31466d-bbb9-40fa-a482-2060762fcafd",
+          "name": "Get Listings",
+          "request": {
+            "name": "Get Listings",
+            "description": {
+              "content": "Fetch all listings",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "listings",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "created_at__gte",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at__lte",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_at__gte",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_at__lte",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "50"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fd7b4d48-b08e-4ad0-989b-e115affff5c6",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "listings",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "created_at__gte",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at__lte",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_at__gte",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_at__lte",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 0,\n  \"page\": 1,\n  \"size\": 50,\n  \"pages\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e15a1075-06b4-442b-be3d-12a027c5ba49",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "listings",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "created_at__gte",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at__lte",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_at__gte",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_at__lte",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b7f06323-779e-4dc8-9ef6-ab2d830f1854",
+          "name": "Post Listing",
+          "request": {
+            "name": "Post Listing",
+            "description": {
+              "content": "Create a listing with all the information:\n\n- **url**: Each listing must have a url\n- **rent_amount**: The rent in dollars as a decimal\n- **date_available**: Date the listing is first available for move in.\n- **status**: A required status\n- **address**: The physical address of the listing\n\n**Sandbox**\n\nWhen a listing is POSTed to the sandbox, applications and groups will\nautomatically be generated for it.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "listings",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rent_amount\": \"<number>\",\n  \"date_available\": \"<date>\",\n  \"status\": \"<string>\",\n  \"address\": {\n    \"address_line_1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"address_line_2\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "75561e89-4cc1-4d12-8473-3a3e6492e857",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "listings",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rent_amount\": \"<number>\",\n  \"date_available\": \"<date>\",\n  \"status\": \"CLOSED\",\n  \"address\": {\n    \"address_line_1\": \"123 Fake St\",\n    \"city\": \"Melber\",\n    \"state\": \"KY\",\n    \"postal_code\": \"42069\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"LOCKED\",\n  \"address\": {\n    \"address_line_1\": \"123 Fake St\",\n    \"city\": \"Melber\",\n    \"state\": \"KY\",\n    \"postal_code\": \"42069\"\n  },\n  \"url\": \"http://I.uykejhBIR+.HcXO4.bj.vFDVEEEBaCexOEw6Y-0TGP2YGIVMPW1gqKwSoiB1Q,DlKgjan\",\n  \"id\": \"2d829742-b5f1-5f47-27cc-209cfe947317\",\n  \"created_at\": \"1950-12-12T01:59:34.661Z\",\n  \"updated_at\": \"2002-07-23T13:18:39.771Z\",\n  \"rent_amount\": 6253.911219115462,\n  \"date_available\": \"2023-03-28\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de17a469-4a7b-4958-8d6d-0f279a4a0765",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "listings",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rent_amount\": \"<number>\",\n  \"date_available\": \"<date>\",\n  \"status\": \"CLOSED\",\n  \"address\": {\n    \"address_line_1\": \"123 Fake St\",\n    \"city\": \"Melber\",\n    \"state\": \"KY\",\n    \"postal_code\": \"42069\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "92636423-7747-44a8-bc85-47bea03027cd",
+          "name": "Get Listing",
+          "request": {
+            "name": "Get Listing",
+            "description": {
+              "content": "Retrieve a specific listing by id (or external_id in the future?)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "listings",
+                ":listing_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "listing_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a356883a-6022-490f-9d3c-5fc9cec64ff9",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "listings",
+                    ":listing_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "listing_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"LOCKED\",\n  \"address\": {\n    \"address_line_1\": \"123 Fake St\",\n    \"city\": \"Melber\",\n    \"state\": \"KY\",\n    \"postal_code\": \"42069\"\n  },\n  \"url\": \"http://I.uykejhBIR+.HcXO4.bj.vFDVEEEBaCexOEw6Y-0TGP2YGIVMPW1gqKwSoiB1Q,DlKgjan\",\n  \"id\": \"2d829742-b5f1-5f47-27cc-209cfe947317\",\n  \"created_at\": \"1950-12-12T01:59:34.661Z\",\n  \"updated_at\": \"2002-07-23T13:18:39.771Z\",\n  \"rent_amount\": 6253.911219115462,\n  \"date_available\": \"2023-03-28\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6437d11c-4005-4199-bbfa-a1323a9102ea",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "listings",
+                    ":listing_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "listing_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1e56e2a1-591f-4875-8372-4caacfa7ce71",
+          "name": "Patch Listing",
+          "request": {
+            "name": "Patch Listing",
+            "description": {
+              "content": "PATCH update the listing specified.\nAll fields in the body are optional, and only those provided will be set.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "listings",
+                ":listing_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "listing_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rent_amount\": \"<number>\",\n  \"date_available\": \"<date>\",\n  \"status\": \"<string>\",\n  \"address\": {\n    \"address_line_1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"address_line_2\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6fedd165-7c00-4972-a105-9241a76ee5a0",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "listings",
+                    ":listing_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "listing_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rent_amount\": \"<number>\",\n  \"date_available\": \"<date>\",\n  \"status\": \"LOCKED\",\n  \"address\": {\n    \"address_line_1\": \"123 Fake St\",\n    \"city\": \"Melber\",\n    \"state\": \"KY\",\n    \"postal_code\": \"42069\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"LOCKED\",\n  \"address\": {\n    \"address_line_1\": \"123 Fake St\",\n    \"city\": \"Melber\",\n    \"state\": \"KY\",\n    \"postal_code\": \"42069\"\n  },\n  \"url\": \"http://I.uykejhBIR+.HcXO4.bj.vFDVEEEBaCexOEw6Y-0TGP2YGIVMPW1gqKwSoiB1Q,DlKgjan\",\n  \"id\": \"2d829742-b5f1-5f47-27cc-209cfe947317\",\n  \"created_at\": \"1950-12-12T01:59:34.661Z\",\n  \"updated_at\": \"2002-07-23T13:18:39.771Z\",\n  \"rent_amount\": 6253.911219115462,\n  \"date_available\": \"2023-03-28\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7ea3031-6ff0-4a53-ad93-c659232c86a6",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "listings",
+                    ":listing_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "listing_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rent_amount\": \"<number>\",\n  \"date_available\": \"<date>\",\n  \"status\": \"LOCKED\",\n  \"address\": {\n    \"address_line_1\": \"123 Fake St\",\n    \"city\": \"Melber\",\n    \"state\": \"KY\",\n    \"postal_code\": \"42069\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "f6588033-be2b-4094-a5cb-d4db15f44e46",
+      "name": "Applications",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "956d2c6f-2954-4f28-8ba9-e425ca4f5fe2",
+          "name": "Get Applications",
+          "request": {
+            "name": "Get Applications",
+            "description": {
+              "content": "Get all applications matching the given query.\nParts of the query are two optional CSV id sets, which are mutually exclusive\nYou cannot query by both a group_id and a listing_id at once, to do so is a 400.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applications",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "groups",
+                  "value": "<uuid>",
+                  "description": "Comma separated list of group_ids to select Applications by"
+                },
+                {
+                  "disabled": false,
+                  "key": "groups",
+                  "value": "<uuid>",
+                  "description": "Comma separated list of group_ids to select Applications by"
+                },
+                {
+                  "disabled": false,
+                  "key": "listings",
+                  "value": "<uuid>",
+                  "description": "Comma separated list of listing_ids to select Applications by"
+                },
+                {
+                  "disabled": false,
+                  "key": "listings",
+                  "value": "<uuid>",
+                  "description": "Comma separated list of listing_ids to select Applications by"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "50"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "32a295fa-5fe4-4de5-8108-3100aa989167",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "groups",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "groups",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "listings",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "listings",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 0,\n  \"page\": 1,\n  \"size\": 50,\n  \"pages\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0cdfe0e1-c7d3-40b2-99f5-ff882e6f0749",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "groups",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "groups",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "listings",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "listings",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cac18949-35f7-4d70-a9b9-2e2b3442a41a",
+          "name": "Get Application",
+          "request": {
+            "name": "Get Application",
+            "description": {
+              "content": "Endpoint to retrieve an individual application by its id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applications",
+                ":application_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "embed_bi_data",
+                  "value": "false",
+                  "description": "Retrieves BI data related to the application."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "application_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2712bc74-37f6-41bd-87fa-445e892b390a",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":application_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "embed_bi_data",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "application_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"listing_id\": \"string\",\n  \"group_id\": \"string\",\n  \"type\": \"guarantor\",\n  \"status\": \"in_progress\",\n  \"group_status\": \"submitted\",\n  \"pet_data\": [\n    {\n      \"age\": 5,\n      \"type\": \"Dog\",\n      \"breed\": \"Pug\",\n      \"weight\": 15,\n      \"is_service_animal\": false\n    },\n    {\n      \"age\": 5,\n      \"type\": \"Dog\",\n      \"breed\": \"Pug\",\n      \"weight\": 15,\n      \"is_service_animal\": false\n    }\n  ],\n  \"id\": \"string\",\n  \"created_at\": \"1993-12-13T13:58:16.256Z\",\n  \"updated_at\": \"2018-01-11T02:21:30.026Z\",\n  \"self_reported_data\": {\n    \"first_name\": \"Wernher\",\n    \"last_name\": \"Braun\",\n    \"email\": \"spaaaaace@nasa.gov\",\n    \"phone\": \"+4903012345678\"\n  },\n  \"current_employment_data\": {\n    \"type\": \"employed\",\n    \"income\": 1234.56,\n    \"company\": \"NASA\",\n    \"position\": \"Rocket Scientist\",\n    \"start_date\": \"1960-04-01\"\n  },\n  \"credit_report_data\": {\n    \"credit\": \"540\",\n    \"criminal\": \"Pass\",\n    \"eviction\": \"Pass\",\n    \"cautions\": []\n  },\n  \"mandatory_disclosures\": {\n    \"qBankruptcy\": false,\n    \"qBreakLease\": false,\n    \"qDamage\": false,\n    \"qEvict\": false,\n    \"qFelony\": false,\n    \"qForeclosure\": false,\n    \"qNonPayment\": false,\n    \"qOutstandingJudgements\": true,\n    \"qRentersInsurance\": false,\n    \"qSection8\": false,\n    \"qSmoke\": false\n  },\n  \"ancillary_questions\": [\n    {\n      \"response\": \"Yes\",\n      \"questionText\": \"Test question text for ancillary question\",\n      \"questionType\": \"yes-no\"\n    },\n    {\n      \"response\": \"Yes\",\n      \"questionText\": \"Test question text for ancillary question\",\n      \"questionType\": \"yes-no\"\n    }\n  ],\n  \"bi_data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb612f8f-cdfa-4ec2-be7c-acad64c4d364",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":application_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "embed_bi_data",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "application_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "1af54cc2-1b5f-477d-8946-4de4b219b7d9",
+      "name": "Groups",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c3c0587d-4b07-4af5-81eb-7d5300d6f89a",
+          "name": "Get Groups",
+          "request": {
+            "name": "Get Groups",
+            "description": {},
+            "url": {
+              "path": [
+                "groups",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "listing_ids",
+                  "value": "<uuid>",
+                  "description": "Comma separated list of listing_ids to select Groups by"
+                },
+                {
+                  "disabled": false,
+                  "key": "listing_ids",
+                  "value": "<uuid>",
+                  "description": "Comma separated list of listing_ids to select Groups by"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status for group of applications"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status for group of applications"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_at__gte",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_at__lte",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "50"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f43c62ca-98bb-4043-80b7-4e2d2824552c",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "listing_ids",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "listing_ids",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "submitted"
+                    },
+                    {
+                      "key": "status",
+                      "value": "declined"
+                    },
+                    {
+                      "key": "updated_at__gte",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_at__lte",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 0,\n  \"page\": 1,\n  \"size\": 50,\n  \"pages\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "27e2b746-7515-41dd-8daa-77a72bea79ec",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "listing_ids",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "listing_ids",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "submitted"
+                    },
+                    {
+                      "key": "status",
+                      "value": "declined"
+                    },
+                    {
+                      "key": "updated_at__gte",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_at__lte",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5aa6580b-19c4-4376-9ca7-41ac274a7782",
+          "name": "Get Group",
+          "request": {
+            "name": "Get Group",
+            "description": {},
+            "url": {
+              "path": [
+                "groups",
+                ":group_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "embed_bi_data",
+                  "value": "false",
+                  "description": "Retrieves BI data related to the application."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) Id of the group to retrieve"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8981f4f9-0a66-475e-914c-203d2a6bdc43",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups",
+                    ":group_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "embed_bi_data",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) Id of the group to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"listing_id\": \"string\",\n  \"url\": \"http://oWCFltWsxnFYar.qozVsgXlrxmoy4\",\n  \"status\": \"onboarded\",\n  \"workflow_status\": \"string\",\n  \"applications\": [\n    {\n      \"listing_id\": \"string\",\n      \"group_id\": \"string\",\n      \"type\": \"guarantor\",\n      \"status\": \"accepted\",\n      \"group_status\": \"onboarded\",\n      \"pet_data\": [\n        {\n          \"age\": 5,\n          \"type\": \"Dog\",\n          \"breed\": \"Pug\",\n          \"weight\": 15,\n          \"is_service_animal\": false\n        },\n        {\n          \"age\": 5,\n          \"type\": \"Dog\",\n          \"breed\": \"Pug\",\n          \"weight\": 15,\n          \"is_service_animal\": false\n        }\n      ],\n      \"id\": \"string\",\n      \"created_at\": \"1964-06-16T07:59:29.680Z\",\n      \"updated_at\": \"1983-10-31T02:24:02.015Z\",\n      \"self_reported_data\": {\n        \"first_name\": \"Wernher\",\n        \"last_name\": \"Braun\",\n        \"email\": \"spaaaaace@nasa.gov\",\n        \"phone\": \"+4903012345678\"\n      },\n      \"current_employment_data\": {\n        \"type\": \"employed\",\n        \"income\": 1234.56,\n        \"company\": \"NASA\",\n        \"position\": \"Rocket Scientist\",\n        \"start_date\": \"1960-04-01\"\n      },\n      \"credit_report_data\": {\n        \"credit\": \"540\",\n        \"criminal\": \"Pass\",\n        \"eviction\": \"Pass\",\n        \"cautions\": []\n      },\n      \"mandatory_disclosures\": {\n        \"qBankruptcy\": false,\n        \"qBreakLease\": false,\n        \"qDamage\": false,\n        \"qEvict\": false,\n        \"qFelony\": false,\n        \"qForeclosure\": false,\n        \"qNonPayment\": false,\n        \"qOutstandingJudgements\": true,\n        \"qRentersInsurance\": false,\n        \"qSection8\": false,\n        \"qSmoke\": false\n      },\n      \"ancillary_questions\": [\n        {\n          \"response\": \"Yes\",\n          \"questionText\": \"Test question text for ancillary question\",\n          \"questionType\": \"yes-no\"\n        },\n        {\n          \"response\": \"Yes\",\n          \"questionText\": \"Test question text for ancillary question\",\n          \"questionType\": \"yes-no\"\n        }\n      ],\n      \"bi_data\": {}\n    },\n    {\n      \"listing_id\": \"string\",\n      \"group_id\": \"string\",\n      \"type\": \"guarantor\",\n      \"status\": \"in_progress\",\n      \"group_status\": \"cancelled\",\n      \"pet_data\": [\n        {\n          \"age\": 5,\n          \"type\": \"Dog\",\n          \"breed\": \"Pug\",\n          \"weight\": 15,\n          \"is_service_animal\": false\n        },\n        {\n          \"age\": 5,\n          \"type\": \"Dog\",\n          \"breed\": \"Pug\",\n          \"weight\": 15,\n          \"is_service_animal\": false\n        }\n      ],\n      \"id\": \"string\",\n      \"created_at\": \"1959-08-08T01:41:54.485Z\",\n      \"updated_at\": \"1958-04-04T01:25:07.908Z\",\n      \"self_reported_data\": {\n        \"first_name\": \"Wernher\",\n        \"last_name\": \"Braun\",\n        \"email\": \"spaaaaace@nasa.gov\",\n        \"phone\": \"+4903012345678\"\n      },\n      \"current_employment_data\": {\n        \"type\": \"employed\",\n        \"income\": 1234.56,\n        \"company\": \"NASA\",\n        \"position\": \"Rocket Scientist\",\n        \"start_date\": \"1960-04-01\"\n      },\n      \"credit_report_data\": {\n        \"credit\": \"540\",\n        \"criminal\": \"Pass\",\n        \"eviction\": \"Pass\",\n        \"cautions\": []\n      },\n      \"mandatory_disclosures\": {\n        \"qBankruptcy\": false,\n        \"qBreakLease\": false,\n        \"qDamage\": false,\n        \"qEvict\": false,\n        \"qFelony\": false,\n        \"qForeclosure\": false,\n        \"qNonPayment\": false,\n        \"qOutstandingJudgements\": true,\n        \"qRentersInsurance\": false,\n        \"qSection8\": false,\n        \"qSmoke\": false\n      },\n      \"ancillary_questions\": [\n        {\n          \"response\": \"Yes\",\n          \"questionText\": \"Test question text for ancillary question\",\n          \"questionType\": \"yes-no\"\n        },\n        {\n          \"response\": \"Yes\",\n          \"questionText\": \"Test question text for ancillary question\",\n          \"questionType\": \"yes-no\"\n        }\n      ],\n      \"bi_data\": {}\n    }\n  ],\n  \"id\": \"string\",\n  \"created_at\": \"1962-08-26T12:21:04.037Z\",\n  \"updated_at\": \"2007-02-16T08:05:08.087Z\",\n  \"desired_move_in_date\": \"1993-09-27\",\n  \"decline_details\": {},\n  \"bi_data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8619c31-d312-4d07-a26a-be7344cf503b",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups",
+                    ":group_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "embed_bi_data",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) Id of the group to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sandbox.findigs.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "97da4692-32bd-4985-978e-bfc2bef0724b",
+    "name": "Findigs Client API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The findigs client api, dive into the endpoints using the menu on the left",
+      "type": "text/plain"
+    }
+  }
+}

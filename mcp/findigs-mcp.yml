@@ -4,27 +4,33 @@ status: candidate
 source: openapi/findigs-client-api-openapi.yml
 published: false
 server: null
-note: >-
-  Findigs operates NO MCP server. Searched the npm registry, the published Findigs Client API
-  reference and the company llms.txt; probed mcp.findigs.com, api.client.findigs.com/mcp,
-  api.findigs.com/mcp and www.findigs.com/mcp with a JSON-RPC tools/list request on 2026-08-12 —
-  nothing. mcp.findigs.com resolves and answers 200, but it is the same wildcard catch-all that serves
-  status.findigs.com, trust.findigs.com and security.findigs.com: it 302s to
-  https://app.findigs.com/login?redirectTo=%2Fdashboard and returns the login SPA, not an MCP
-  endpoint. NO MCPServer pointer is emitted in apis.yml on the strength of this file, because that
-  pointer asserts the provider runs a server and Findigs does not. The tools below are a CANDIDATE
-  design derived one-to-one from the eight real operations in the published OpenAPI — a proposal for
-  what a Findigs MCP server could expose, not a description of anything Findigs ships.
+note: 'Findigs operates NO MCP server. Searched the npm registry, the published Findigs Client API reference
+  and the company llms.txt; probed mcp.findigs.com, api.client.findigs.com/mcp, api.findigs.com/mcp and
+  www.findigs.com/mcp with a JSON-RPC tools/list request on 2026-08-12 — nothing. mcp.findigs.com resolves
+  and answers 200, but it is the same wildcard catch-all that serves status.findigs.com, trust.findigs.com
+  and security.findigs.com: it 302s to https://app.findigs.com/login?redirectTo=%2Fdashboard and returns
+  the login SPA, not an MCP endpoint. NO MCPServer pointer is emitted in apis.yml on the strength of this
+  file, because that pointer asserts the provider runs a server and Findigs does not. The tools below
+  are a CANDIDATE design derived one-to-one from the eight real operations in the published OpenAPI —
+  a proposal for what a Findigs MCP server could expose, not a description of anything Findigs ships.'
 probes:
-- {url: 'https://mcp.findigs.com', method: POST, status: 200, finding: 'wildcard catch-all — redirects to app.findigs.com login, returns HTML'}
-- {url: 'https://api.client.findigs.com/mcp', method: POST, status: 404}
-- {url: 'https://api.findigs.com/mcp', method: POST, status: 404}
-- {url: 'https://www.findigs.com/mcp', method: POST, status: 404}
-transport_note: >-
-  Any such server would need to carry the X-API-KEY scoped key described in
-  authentication/findigs-authentication.yml, and would be handling FCRA-regulated consumer report data
-  (credit, criminal and eviction ratings, income, mandatory disclosures) — see the data_sensitivity
-  note in conventions/findigs-conventions.yml before exposing these tools to an agent.
+- url: https://mcp.findigs.com
+  method: POST
+  status: 200
+  finding: wildcard catch-all — redirects to app.findigs.com login, returns HTML
+- url: https://api.client.findigs.com/mcp
+  method: POST
+  status: 404
+- url: https://api.findigs.com/mcp
+  method: POST
+  status: 404
+- url: https://www.findigs.com/mcp
+  method: POST
+  status: 404
+transport_note: Any such server would need to carry the X-API-KEY scoped key described in authentication/findigs-authentication.yml,
+  and would be handling FCRA-regulated consumer report data (credit, criminal and eviction ratings, income,
+  mandatory disclosures) — see the data_sensitivity note in conventions/findigs-conventions.yml before
+  exposing these tools to an agent.
 tools:
 - name: list_listings
   description: List rental listings, optionally filtered by created/updated time window, paginated.
@@ -43,8 +49,7 @@ tools:
   source_operation: openapi/findigs-client-api-openapi.yml#patch_listing_listings__listing_id__patch
   read_only: false
 - name: list_applications
-  description: >-
-    List applications, filtered by a set of group ids OR a set of listing ids (mutually exclusive),
+  description: List applications, filtered by a set of group ids OR a set of listing ids (mutually exclusive),
     paginated.
   source_operation: openapi/findigs-client-api-openapi.yml#get_applications_applications__get
   read_only: true
@@ -60,8 +65,13 @@ tools:
   description: Retrieve a single application group by uuid, optionally embedding BI data.
   source_operation: openapi/findigs-client-api-openapi.yml#get_group_groups__group_id__get
   read_only: true
-crosswalk_note: >-
-  No mcp/findigs-tool-crosswalk.yml is emitted. The crosswalk artifact exists to record divergence
-  between a provider's MCP, GraphQL and REST surfaces. Findigs publishes only REST, and the tool list
-  above was derived one-to-one from that same OpenAPI, so a crosswalk would be a circular restatement
+crosswalk_note: No mcp/findigs-tool-crosswalk.yml is emitted. The crosswalk artifact exists to record
+  divergence between a provider's MCP, GraphQL and REST surfaces. Findigs publishes only REST, and the
+  tool list above was derived one-to-one from that same OpenAPI, so a crosswalk would be a circular restatement
   of this file with nothing in mcp_only[] or rest_only[].
+deployment:
+  mode: none
+  verified: derived
+  tools: 8
+  checked: '2026-08-12'
+  source: catalog MCP census
