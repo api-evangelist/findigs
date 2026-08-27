@@ -56,45 +56,86 @@ tags_raw:
 - fair-housing
 - webhooks
 apis:
-- name: Findigs Client API
-  description: >-
-    REST API for programmatic interaction with Findigs and integration of Findigs data into existing
-    property management systems and workflows. Covers listings (the window during which a unit accepts
-    rental applications), applications (an individual applicant's submission, including self-reported
-    data, employment, credit report data, mandatory disclosures, pet data and ancillary questions) and
-    groups (a collection of applications decisioned together). Authenticated with a scoped API key in
-    the X-API-KEY header, with separate sandbox and production environments. Findigs states this API is
-    not available to new clients; existing customers may continue and should contact
-    integrations@findigs.com.
+- aid: findigs:findigs-applications-api
+  name: Findigs Applications API
+  description: The Applications API from Findigs — 2 operation(s) for applications.
   humanURL: https://docs.getfindigs.com/
   baseURL: https://api.client.findigs.com
   tags:
-  - rental-screening
-  - rental-application
-  - Underwriting
-  - Decisioning
-  - Property Management
-  - PropTech
-  - Webhook
-  tags_raw:
-  - rental-screening
-  - rental-application
-  - underwriting
-  - decisioning
-  - property-management
-  - proptech
-  - webhooks
+  - Applications
   properties:
   - type: OpenAPI
-    url: openapi/findigs-client-api-openapi.yml
+    url: openapi/findigs-applications-api-openapi.yml
   - type: APIReference
     url: https://docs.getfindigs.com/
   - type: Documentation
     url: https://docs.getfindigs.com/
   - type: Postman
     url: https://docs.getfindigs.com/
-  - type: Overlay
-    url: overlays/findigs-client-api-overlay.yaml
+  - type: Authentication
+    url: authentication/findigs-authentication.yml
+  - type: Conventions
+    url: conventions/findigs-conventions.yml
+  - type: DataModel
+    url: data-model/findigs-data-model.yml
+  - type: ErrorCatalog
+    url: errors/findigs-problem-types.yml
+  - type: Webhooks
+    url: asyncapi/findigs-webhooks.yml
+  - type: Sandbox
+    url: sandbox/findigs-sandbox.yml
+  - type: Examples
+    url: examples/findigs-client-api-examples.yml
+  - type: RateLimits
+    url: rate-limits/findigs-rate-limits.yml
+- aid: findigs:findigs-groups-api
+  name: Findigs Groups API
+  description: The Groups API from Findigs — 2 operation(s) for groups.
+  humanURL: https://docs.getfindigs.com/
+  baseURL: https://api.client.findigs.com
+  tags:
+  - Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/findigs-groups-api-openapi.yml
+  - type: APIReference
+    url: https://docs.getfindigs.com/
+  - type: Documentation
+    url: https://docs.getfindigs.com/
+  - type: Postman
+    url: https://docs.getfindigs.com/
+  - type: Authentication
+    url: authentication/findigs-authentication.yml
+  - type: Conventions
+    url: conventions/findigs-conventions.yml
+  - type: DataModel
+    url: data-model/findigs-data-model.yml
+  - type: ErrorCatalog
+    url: errors/findigs-problem-types.yml
+  - type: Webhooks
+    url: asyncapi/findigs-webhooks.yml
+  - type: Sandbox
+    url: sandbox/findigs-sandbox.yml
+  - type: Examples
+    url: examples/findigs-client-api-examples.yml
+  - type: RateLimits
+    url: rate-limits/findigs-rate-limits.yml
+- aid: findigs:findigs-listings-api
+  name: Findigs Listings API
+  description: The Listings API from Findigs — 2 operation(s) for listings.
+  humanURL: https://docs.getfindigs.com/
+  baseURL: https://api.client.findigs.com
+  tags:
+  - Listings
+  properties:
+  - type: OpenAPI
+    url: openapi/findigs-listings-api-openapi.yml
+  - type: APIReference
+    url: https://docs.getfindigs.com/
+  - type: Documentation
+    url: https://docs.getfindigs.com/
+  - type: Postman
+    url: https://docs.getfindigs.com/
   - type: Authentication
     url: authentication/findigs-authentication.yml
   - type: Conventions
