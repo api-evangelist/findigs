@@ -165,6 +165,9 @@ apis:
   - type: RateLimits
     url: rate-limits/findigs-rate-limits.yml
 common:
+- type: CapabilityMap
+  url: capabilities/findigs-capability-edges.yml
+  name: Findigs Business Capability Map
 - type: Website
   url: https://www.findigs.com/
 - type: DeveloperPortal
