@@ -12,6 +12,18 @@ description: >-
   authenticated with a scoped X-API-KEY header and paired with a sandbox environment and a terse
   webhook event surface — though the company states the Client API is closed to new clients and
   existing integrators should contact integrations@findigs.com.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://www.findigs.com/opengraph-image?title=Resident%20screening%20and%20rental%20decisioning%20%7C%20Findigs&variant=home
 url: https://raw.githubusercontent.com/api-evangelist/findigs/refs/heads/main/apis.yml
 x-type: company
