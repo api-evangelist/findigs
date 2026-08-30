@@ -33,21 +33,21 @@ created: '2026-08-12'
 modified: '2026-08-12'
 tags:
 - rental-screening
-- Tenant Screening
+- tenant-screening
 - resident-screening
 - rental-application
-- Underwriting
-- Decisioning
+- underwriting
+- decisioning
 - Identity Verification
-- Income Verification
-- Credit Check
-- Background Check
-- Fraud Detection
-- Property Management
-- Real-Estate
-- PropTech
-- FCRA
-- Fair Housing
+- income-verification
+- credit-check
+- background-check
+- fraud-detection
+- property-management
+- real-estate
+- proptech
+- fcra
+- fair-housing
 - Webhook
 tags_raw:
 - rental-screening
@@ -74,6 +74,8 @@ apis:
   humanURL: https://docs.getfindigs.com/
   baseURL: https://api.client.findigs.com
   tags:
+  - Application
+  tags_raw:
   - Applications
   properties:
   - type: OpenAPI
@@ -106,6 +108,8 @@ apis:
   humanURL: https://docs.getfindigs.com/
   baseURL: https://api.client.findigs.com
   tags:
+  - Group
+  tags_raw:
   - Groups
   properties:
   - type: OpenAPI
