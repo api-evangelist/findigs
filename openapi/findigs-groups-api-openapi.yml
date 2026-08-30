@@ -1,0 +1,701 @@
+openapi: 3.2.0
+info:
+  title: Findigs Client Groups API
+  description: The findigs client api, dive into the endpoints using the menu on the left
+  version: 0.1.0
+servers:
+- url: https://api.sandbox.findigs.com
+  description: Sandbox Environment
+- url: https://api.client.findigs.com
+  description: Live Production Environment
+tags:
+- name: Groups
+paths:
+  /groups/:
+    get:
+      tags:
+      - Groups
+      summary: Get Groups
+      operationId: get_groups_groups__get
+      parameters:
+      - description: Comma separated list of listing_ids to select Groups by
+        required: false
+        schema:
+          items:
+            type: string
+            format: uuid
+          type: array
+          title: Listing Ids
+          description: Comma separated list of listing_ids to select Groups by
+        name: listing_ids
+        in: query
+      - description: Status for group of applications
+        required: false
+        schema:
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/GroupStatus'
+            - type: string
+          type: array
+          title: Status
+          description: Status for group of applications
+        name: status
+        in: query
+      - required: false
+        schema:
+          type: string
+          format: date-time
+          title: Updated At >=
+        name: updated_at__gte
+        in: query
+      - required: false
+        schema:
+          type: string
+          format: date-time
+          title: Updated At <=
+        name: updated_at__lte
+        in: query
+      - required: false
+        schema:
+          type: integer
+          minimum: 1.0
+          title: Page
+          default: 1
+        name: page
+        in: query
+      - required: false
+        schema:
+          type: integer
+          maximum: 100.0
+          minimum: 1.0
+          title: Size
+          default: 50
+        name: size
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Page'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - APIKeyHeader: []
+  /groups/{group_id}:
+    get:
+      tags:
+      - Groups
+      summary: Get Group
+      operationId: get_group_groups__group_id__get
+      parameters:
+      - description: Id of the group to retrieve
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Listing Id
+          description: Id of the group to retrieve
+        name: group_id
+        in: path
+      - description: Retrieves BI data related to the application.
+        required: false
+        schema:
+          type: boolean
+          title: Embed Bi Data
+          description: Retrieves BI data related to the application.
+          default: false
+        name: embed_bi_data
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - APIKeyHeader: []
+components:
+  schemas:
+    AncillaryQuestionType:
+      type: string
+      enum:
+      - yes-no
+      - file
+      - text
+      title: AncillaryQuestionType
+      description: 'A type of ancillary question
+
+
+        **YES_NO** - yes or no question type
+
+        **FILE** - file upload question type
+
+        **TEXT** - free text question type'
+    EmploymentType:
+      type: string
+      enum:
+      - employed
+      - offer
+      - offer_letter
+      - own
+      - self_employed
+      - student
+      - not
+      - other
+      - benefits
+      - retired
+      title: EmploymentType
+      description: 'A method of employment
+
+
+        **EMPLOYED** - Is currently employed
+
+        **OFFER** - Has an offer of employment
+
+        **OFFER_LETTER** - Has an offer letter
+
+        **OWN** - Owns their own business
+
+        **SELF_EMPLOYED** - Self employed
+
+        **STUDENT** - Student
+
+        **NOT** - Not employed
+
+        **OTHER** - Other employment type
+
+        **BENEFITS** - Receiving benefits
+
+        **RETIRED** - Retired'
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    MandatoryDisclosures:
+      properties:
+        qBankruptcy:
+          type: boolean
+          title: Qbankruptcy
+          description: Have you filed for bankruptcy in the last 7 years?
+        qBreakLease:
+          type: boolean
+          title: Qbreaklease
+          description: Have you ever broken a lease or rental agreement?
+        qDamage:
+          type: boolean
+          title: Qdamage
+          description: Have you ever been sued for damages to a rental property?
+        qEvict:
+          type: boolean
+          title: Qevict
+          description: Have you ever been evicted or asked to move out of a rental?
+        qFelony:
+          type: boolean
+          title: Qfelony
+          description: Have you ever been convicted of a felony or sex-related crime?
+        qForeclosure:
+          type: boolean
+          title: Qforeclosure
+          description: Have you ever lost property in a foreclosure?
+        qNonPayment:
+          type: boolean
+          title: Qnonpayment
+          description: Have you ever been sued for non-payment of rent?
+        qOutstandingJudgements:
+          type: boolean
+          title: Qoutstandingjudgements
+          description: Do you have any outstanding judgments or collection accounts?
+        qRentersInsurance:
+          type: boolean
+          title: Qrentersinsurance
+          description: Do you have renter's insurance?
+        qSection8:
+          type: boolean
+          title: Qsection8
+          description: Are you applying as part of the Section 8 Program?
+        qSmoke:
+          type: boolean
+          title: Qsmoke
+          description: Are you a smoker?
+      type: object
+      title: MandatoryDisclosures
+      example:
+        qBankruptcy: false
+        qBreakLease: false
+        qDamage: false
+        qEvict: false
+        qFelony: false
+        qForeclosure: false
+        qNonPayment: false
+        qOutstandingJudgements: true
+        qRentersInsurance: false
+        qSection8: false
+        qSmoke: false
+    Application:
+      properties:
+        listing_id:
+          type: string
+          format: uuid4
+          title: Listing Id
+          description: ID
+        group_id:
+          type: string
+          format: uuid4
+          title: Group Id
+          description: ID of the group this application belongs to
+        type:
+          $ref: '#/components/schemas/ApplicationType'
+        status:
+          $ref: '#/components/schemas/ApplicationStatus'
+        group_status:
+          $ref: '#/components/schemas/GroupStatus'
+        self_reported_data:
+          $ref: '#/components/schemas/SelfReportedData'
+        pet_data:
+          items:
+            $ref: '#/components/schemas/PetData'
+          type: array
+          title: Pet Data
+        current_employment_data:
+          $ref: '#/components/schemas/CurrentEmploymentData'
+        credit_report_data:
+          $ref: '#/components/schemas/CreditReportData'
+        mandatory_disclosures:
+          $ref: '#/components/schemas/MandatoryDisclosures'
+        ancillary_questions:
+          items:
+            $ref: '#/components/schemas/AncillaryQuestion'
+          type: array
+          title: Ancillary Questions
+        id:
+          type: string
+          format: uuid4
+          title: Id
+          description: Unique id of the application
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+        bi_data:
+          type: object
+          title: Bi Data
+          exclude_unset: true
+      type: object
+      required:
+      - listing_id
+      - group_id
+      - type
+      - status
+      - group_status
+      - pet_data
+      - id
+      - created_at
+      - updated_at
+      title: Application
+      example:
+        id: cb0a635b-c422-4a3f-8679-015a1466c748
+        created_at: '2026-08-12T02:42:49.199599'
+        updated_at: '2026-08-12T02:42:49.199603'
+        listing_id: 6c27daea-cfb6-4117-b1c8-e98adab8ede5
+        group_id: 9878a491-94b0-4049-93b9-5625c9c7ed0a
+        type: applicant
+        status: completed
+        group_status: pending_review
+        self_reported_data:
+          first_name: Wernher
+          last_name: Braun
+          email: spaaaaace@nasa.gov
+          phone: '+4903012345678'
+        pet_data:
+        - age: 5
+          type: Dog
+          breed: Pug
+          weight: 15
+          is_service_animal: false
+        current_employment_data:
+          type: employed
+          income: 1234.56
+          company: NASA
+          position: Rocket Scientist
+          start_date: '1960-04-01'
+        credit_report_data:
+          credit: '540'
+          criminal: Pass
+          eviction: Pass
+          cautions: []
+        mandatory_disclosures:
+          qBankruptcy: false
+          qBreakLease: false
+          qDamage: false
+          qEvict: false
+          qFelony: false
+          qForeclosure: false
+          qNonPayment: false
+          qOutstandingJudgements: true
+          qRentersInsurance: false
+          qSection8: false
+          qSmoke: false
+    AncillaryQuestion:
+      properties:
+        response:
+          type: string
+          title: Response
+          description: The response of an ancillary question.
+        questionText:
+          type: string
+          title: Questiontext
+          description: The question of an ancillary question.
+        questionType:
+          allOf:
+          - $ref: '#/components/schemas/AncillaryQuestionType'
+          description: The type for an ancillary question.
+      type: object
+      required:
+      - questionText
+      - questionType
+      title: AncillaryQuestion
+      example:
+        response: 'Yes'
+        questionText: Test question text for ancillary question
+        questionType: yes-no
+    Group:
+      properties:
+        listing_id:
+          type: string
+          format: uuid4
+          title: Listing Id
+          description: ID of the listing the group applied to
+        url:
+          type: string
+          maxLength: 65536
+          minLength: 1
+          format: uri
+          title: Url
+          description: URL of the full application on findigs.com
+        status:
+          allOf:
+          - $ref: '#/components/schemas/GroupStatus'
+          description: The status of the group
+        workflow_status:
+          type: string
+          title: Workflow Status
+          description: Custom group status displayed in the application list
+        desired_move_in_date:
+          type: string
+          format: date
+          title: Desired Move In Date
+          description: when they wanna move
+        decline_details:
+          type: object
+          title: Decline Details
+          description: decline reasons yo
+        applications:
+          items:
+            $ref: '#/components/schemas/Application'
+          type: array
+          title: Applications
+        id:
+          type: string
+          format: uuid4
+          title: Id
+          description: Unique id of the group
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+        bi_data:
+          type: object
+          title: Bi Data
+          exclude_unset: true
+      type: object
+      required:
+      - listing_id
+      - url
+      - status
+      - workflow_status
+      - applications
+      - id
+      - created_at
+      - updated_at
+      title: Group
+      example:
+        id: 0bdd37c8-4e8f-43b6-b899-5e8452019bfa
+        created_at: '2026-08-12T02:42:49.201207'
+        updated_at: '2026-08-12T02:42:49.201209'
+        listing_id: 8a10744e-0a39-4715-82df-92bf55b6834e
+        url: https://your-subdomain.findigs.com/group-applications/v2/groupid=7fe8e1a8-ad54-4855-86c8-3b2ac96fc1ca
+        group_status: pending_review
+        workflow_status: This is a string
+        applications:
+        - id: cb0a635b-c422-4a3f-8679-015a1466c748
+          created_at: '2026-08-12T02:42:49.199599'
+          updated_at: '2026-08-12T02:42:49.199603'
+          listing_id: 6c27daea-cfb6-4117-b1c8-e98adab8ede5
+          group_id: 9878a491-94b0-4049-93b9-5625c9c7ed0a
+          type: applicant
+          status: completed
+          group_status: pending_review
+          self_reported_data:
+            first_name: Wernher
+            last_name: Braun
+            email: spaaaaace@nasa.gov
+            phone: '+4903012345678'
+          pet_data:
+          - age: 5
+            type: Dog
+            breed: Pug
+            weight: 15
+            is_service_animal: false
+          current_employment_data:
+            type: employed
+            income: 1234.56
+            company: NASA
+            position: Rocket Scientist
+            start_date: '1960-04-01'
+          credit_report_data:
+            credit: '540'
+            criminal: Pass
+            eviction: Pass
+            cautions: []
+          mandatory_disclosures:
+            qBankruptcy: false
+            qBreakLease: false
+            qDamage: false
+            qEvict: false
+            qFelony: false
+            qForeclosure: false
+            qNonPayment: false
+            qOutstandingJudgements: true
+            qRentersInsurance: false
+            qSection8: false
+            qSmoke: false
+    SelfReportedData:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+          description: Applicants self reported first name
+        last_name:
+          type: string
+          title: Last Name
+          description: Applicants self reported last name
+        email:
+          type: string
+          title: Email
+          description: Applicants login email, unverified
+        phone:
+          type: string
+          maxLength: 16
+          minLength: 1
+          pattern: ^\+?[1-9]?\d{1,14}$
+          title: Phone
+          description: Applicants 2FA phone number, verified
+      type: object
+      required:
+      - first_name
+      - last_name
+      - email
+      title: SelfReportedData
+      description: Data an applicant entered about themselves, varying levels of verified.
+      example:
+        first_name: Wernher
+        last_name: Braun
+        email: spaaaaace@nasa.gov
+        phone: '+4903012345678'
+    ApplicationStatus:
+      type: string
+      enum:
+      - in_progress
+      - completed
+      - accepted
+      title: ApplicationStatus
+      description: An enumeration.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Page:
+      properties:
+        items:
+          items: {}
+          type: array
+          title: Items
+        total:
+          type: integer
+          title: Total
+          default: 0
+        page:
+          type: integer
+          title: Page
+          default: 1
+        size:
+          type: integer
+          title: Size
+          default: 50
+        pages:
+          type: integer
+          title: Pages
+          default: 0
+      type: object
+      title: Page
+      description: Simple pagination class to replace fastapi-pagination.Page
+    CurrentEmploymentData:
+      properties:
+        type:
+          $ref: '#/components/schemas/EmploymentType'
+        income:
+          type: number
+          title: Income
+          description: Applicants gross monthly income, in dollars
+        company:
+          type: string
+          title: Company
+          description: Name of the company
+        position:
+          type: string
+          title: Position
+          description: Applicants position at the company
+        start_date:
+          type: string
+          format: date
+          title: Start Date
+          description: When the applicant started working with this company
+      type: object
+      title: CurrentEmploymentData
+      example:
+        type: employed
+        income: 1234.56
+        company: NASA
+        position: Rocket Scientist
+        start_date: '1960-04-01'
+    ApplicationType:
+      type: string
+      enum:
+      - applicant
+      - guarantor
+      title: ApplicationType
+      description: An enumeration.
+    CreditReportData:
+      properties:
+        credit:
+          type: string
+          maxLength: 3
+          minLength: 3
+          pattern: ^[0-9]{3}$
+          title: Credit
+        criminal:
+          type: string
+          title: Criminal
+          description: A rating of applicants criminal history
+        eviction:
+          type: string
+          title: Eviction
+          description: A rating of applicants eviction history
+        cautions:
+          items:
+            type: string
+          type: array
+          title: Cautions
+          description: Human readable caution statements from applicants credit check
+      type: object
+      title: CreditReportData
+      example:
+        credit: '540'
+        criminal: Pass
+        eviction: Pass
+        cautions: []
+    GroupStatus:
+      type: string
+      enum:
+      - incomplete
+      - submitted
+      - passed
+      - pending_review
+      - declined
+      - approved
+      - onboarded
+      - cancelled
+      title: GroupStatus
+      description: Enum of GroupStatus
+    PetData:
+      properties:
+        age:
+          type: number
+          minimum: 0.0
+          title: Age
+        type:
+          type: string
+          title: Type
+          description: What type of pet is it? (Dog, Cat, Rock)
+        breed:
+          type: string
+          title: Breed
+          description: Breed for the specific type, if applicable
+        weight:
+          type: number
+          minimum: 0.0
+          title: Weight
+        is_service_animal:
+          type: boolean
+          title: Is Service Animal
+          default: false
+      type: object
+      required:
+      - type
+      - breed
+      - weight
+      title: PetData
+      example:
+        age: 5
+        type: Dog
+        breed: Pug
+        weight: 15
+        is_service_animal: false
+  securitySchemes:
+    APIKeyHeader:
+      type: apiKey
+      in: header
+      name: X-API-KEY

@@ -1,0 +1,458 @@
+openapi: 3.2.0
+info:
+  title: Findigs Client Listings API
+  description: The findigs client api, dive into the endpoints using the menu on the left
+  version: 0.1.0
+servers:
+- url: https://api.sandbox.findigs.com
+  description: Sandbox Environment
+- url: https://api.client.findigs.com
+  description: Live Production Environment
+tags:
+- name: Listings
+paths:
+  /listings/:
+    get:
+      tags:
+      - Listings
+      summary: Get Listings
+      description: Fetch all listings
+      operationId: get_listings_listings__get
+      parameters:
+      - required: false
+        schema:
+          type: string
+          format: date-time
+          title: Created At >=
+        name: created_at__gte
+        in: query
+      - required: false
+        schema:
+          type: string
+          format: date-time
+          title: Created At <=
+        name: created_at__lte
+        in: query
+      - required: false
+        schema:
+          type: string
+          format: date-time
+          title: Updated At >=
+        name: updated_at__gte
+        in: query
+      - required: false
+        schema:
+          type: string
+          format: date-time
+          title: Updated At <=
+        name: updated_at__lte
+        in: query
+      - required: false
+        schema:
+          type: integer
+          minimum: 1.0
+          title: Page
+          default: 1
+        name: page
+        in: query
+      - required: false
+        schema:
+          type: integer
+          maximum: 100.0
+          minimum: 1.0
+          title: Size
+          default: 50
+        name: size
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Page'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - APIKeyHeader: []
+    post:
+      tags:
+      - Listings
+      summary: Post Listing
+      description: 'Create a listing with all the information:
+
+
+        - **url**: Each listing must have a url
+
+        - **rent_amount**: The rent in dollars as a decimal
+
+        - **date_available**: Date the listing is first available for move in.
+
+        - **status**: A required status
+
+        - **address**: The physical address of the listing
+
+
+        **Sandbox**
+
+
+        When a listing is POSTed to the sandbox, applications and groups will
+
+        automatically be generated for it.'
+      operationId: post_listing_listings__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListingCreate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Listing'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - APIKeyHeader: []
+  /listings/{listing_id}:
+    get:
+      tags:
+      - Listings
+      summary: Get Listing
+      description: Retrieve a specific listing by id (or external_id in the future?)
+      operationId: get_listing_listings__listing_id__get
+      parameters:
+      - required: true
+        schema:
+          type: string
+          format: uuid
+          title: Listing Id
+        name: listing_id
+        in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Listing'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - APIKeyHeader: []
+    patch:
+      tags:
+      - Listings
+      summary: Patch Listing
+      description: 'PATCH update the listing specified.
+
+        All fields in the body are optional, and only those provided will be set.'
+      operationId: patch_listing_listings__listing_id__patch
+      parameters:
+      - required: true
+        schema:
+          type: string
+          format: uuid
+          title: Listing Id
+        name: listing_id
+        in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListingUpdate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Listing'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - APIKeyHeader: []
+components:
+  schemas:
+    Listing:
+      properties:
+        rent_amount:
+          type: number
+          minimum: 0.0
+          title: Rent Amount
+          description: Rent Amount in dollars (ex. 500.50)
+        date_available:
+          type: string
+          format: date
+          title: Date Available
+          description: Date the listing is available for move-in
+        status:
+          $ref: '#/components/schemas/ListingStatus'
+        address:
+          $ref: '#/components/schemas/ListingAddressResult'
+        url:
+          type: string
+          maxLength: 65536
+          minLength: 1
+          format: uri
+          title: Listing URL
+          description: Direct URL to the listing application portal
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Findigs internal id of the listing
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - status
+      - address
+      - url
+      - id
+      - created_at
+      - updated_at
+      title: Listing
+      example:
+        id: 98054c1b-79b1-4d87-a1ee-89e001bd86a7
+        url: https://yoursubdomain.findigs.com/apply/unitid=98054c1b-79b1-4d87-a1ee-89e001bd86a7
+        created_at: '2026-08-12T02:42:49.205840'
+        updated_at: '2026-08-12T02:42:49.205842'
+        rent_amount: '6969.69'
+        date_available: '2021-04-20'
+        status: LISTED
+        address:
+          address_line_1: 123 Fake St
+          city: Melber
+          state: KY
+          postal_code: '42069'
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ListingCreate:
+      properties:
+        rent_amount:
+          type: number
+          minimum: 0.0
+          title: Rent Amount
+          description: Rent Amount in dollars (ex. 500.50)
+        date_available:
+          type: string
+          format: date
+          title: Date Available
+          description: Date the listing is available for move-in
+        status:
+          $ref: '#/components/schemas/ListingStatus'
+        address:
+          allOf:
+          - $ref: '#/components/schemas/ListingAddress'
+          title: Listing Address
+          description: Physical address of the listing
+      type: object
+      required:
+      - rent_amount
+      - date_available
+      - status
+      - address
+      title: ListingCreate
+      example:
+        rent_amount: '6969.69'
+        date_available: '2021-04-20'
+        status: LISTED
+        address:
+          address_line_1: 123 Fake St
+          city: Melber
+          state: KY
+          postal_code: '42069'
+      x-tags:
+      - listings
+    ListingStatus:
+      type: string
+      enum:
+      - LISTED
+      - LOCKED
+      - CLOSED
+      title: ListingStatus
+      description: '* **LISTED**: Listing will appear in search and accept applications.
+
+        * **LOCKED**: Listing will not appear in search but will accept applications
+
+        * **CLOSED**: Listing will not appear in search or accept applications'
+    ListingAddress:
+      properties:
+        address_line_1:
+          type: string
+          title: Address Line 1
+        address_line_2:
+          type: string
+          title: Address Line 2
+        city:
+          type: string
+          title: City
+        state:
+          type: string
+          maxLength: 2
+          minLength: 2
+          title: State
+          description: 2 letter ISO 3166-2 US subdivision code (part after the "US-")
+        postal_code:
+          type: string
+          maxLength: 10
+          minLength: 5
+          pattern: ^[0-9]{5}(?:-[0-9]{4})?$
+          title: Postal Code
+      type: object
+      required:
+      - address_line_1
+      - city
+      - state
+      - postal_code
+      title: ListingAddress
+      example:
+        address_line_1: 123 Fake St
+        city: Melber
+        state: KY
+        postal_code: '42069'
+      x-tags:
+      - listings
+    ListingAddressResult:
+      properties:
+        address_line_1:
+          type: string
+          title: Address Line 1
+        address_line_2:
+          type: string
+          title: Address Line 2
+        city:
+          type: string
+          title: City
+        state:
+          type: string
+          title: State
+        postal_code:
+          type: string
+          title: Postal Code
+      type: object
+      title: ListingAddressResult
+      example:
+        address_line_1: 123 Fake St
+        city: Melber
+        state: KY
+        postal_code: '42069'
+      x-tags:
+      - listings
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Page:
+      properties:
+        items:
+          items: {}
+          type: array
+          title: Items
+        total:
+          type: integer
+          title: Total
+          default: 0
+        page:
+          type: integer
+          title: Page
+          default: 1
+        size:
+          type: integer
+          title: Size
+          default: 50
+        pages:
+          type: integer
+          title: Pages
+          default: 0
+      type: object
+      title: Page
+      description: Simple pagination class to replace fastapi-pagination.Page
+    ListingUpdate:
+      properties:
+        rent_amount:
+          type: number
+          minimum: 0.0
+          title: Rent Amount
+          description: Rent Amount in dollars (ex. 500.50)
+        date_available:
+          type: string
+          format: date
+          title: Date Available
+          description: Date the listing is available for move-in
+        status:
+          $ref: '#/components/schemas/ListingStatus'
+        address:
+          allOf:
+          - $ref: '#/components/schemas/ListingAddress'
+          title: Listing Address
+          description: Physical address of the listing
+      type: object
+      title: ListingUpdate
+      example:
+        rent_amount: '6969.69'
+        date_available: '2021-04-20'
+        status: LISTED
+        address:
+          address_line_1: 123 Fake St
+          city: Melber
+          state: KY
+          postal_code: '42069'
+      x-tags:
+      - listings
+  securitySchemes:
+    APIKeyHeader:
+      type: apiKey
+      in: header
+      name: X-API-KEY
