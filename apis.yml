@@ -24,6 +24,22 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+accessModel:
+  pricing: enterprise
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise
+  confidence: high
+  source:
+  - plans
+  - authentication
+  - rate-limits
+  - security
+  - sandbox
+  generated: '2026-09-03'
+  method: derived
 image: https://www.findigs.com/opengraph-image?title=Resident%20screening%20and%20rental%20decisioning%20%7C%20Findigs&variant=home
 url: https://raw.githubusercontent.com/api-evangelist/findigs/refs/heads/main/apis.yml
 x-type: company
