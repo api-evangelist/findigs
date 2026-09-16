@@ -1,17 +1,15 @@
 aid: findigs
 name: Findigs
-description: >-
-  Findigs is a New York City based residential real estate decisioning platform that screens rental
-  applicants for identity, income, employment, credit, criminal history, eviction records, documents
+description: Findigs is a New York City based residential real estate decisioning platform that screens
+  rental applicants for identity, income, employment, credit, criminal history, eviction records, documents
   and pets, then applies automated underwriting against each operator's own written policy criteria to
-  render a full yes/no decision on every rental application rather than handing back raw screening
-  reports. The platform spans screening, underwriting, policy optimization and post-lease performance
-  data, is backed by a contractual fraud guarantee, and reports a median decision time of 3.4 hours
-  across 400K+ rental units. Findigs publishes a machine-readable Client API — an OpenAPI 3.1.0
-  contract served from api.client.findigs.com covering listings, applications and applicant groups,
-  authenticated with a scoped X-API-KEY header and paired with a sandbox environment and a terse
-  webhook event surface — though the company states the Client API is closed to new clients and
-  existing integrators should contact integrations@findigs.com.
+  render a full yes/no decision on every rental application rather than handing back raw screening reports.
+  The platform spans screening, underwriting, policy optimization and post-lease performance data, is
+  backed by a contractual fraud guarantee, and reports a median decision time of 3.4 hours across 400K+
+  rental units. Findigs publishes a machine-readable Client API — an OpenAPI 3.1.0 contract served from
+  api.client.findigs.com covering listings, applications and applicant groups, authenticated with a scoped
+  X-API-KEY header and paired with a sandbox environment and a terse webhook event surface — though the
+  company states the Client API is closed to new clients and existing integrators should contact integrations@findigs.com.
 deliveryModel:
   model: saas
   open_source: false
@@ -46,7 +44,7 @@ x-type: company
 x-source: harvest:secondary-market
 specificationVersion: '0.23'
 created: '2026-08-12'
-modified: '2026-08-12'
+modified: '2026-09-16'
 tags:
 - rental-screening
 - Tenant Screening
@@ -199,7 +197,7 @@ common:
 - type: Postman
   url: https://docs.getfindigs.com/
 - type: OpenAPI
-  url: openapi/findigs-client-api-openapi.yml
+  url: openapi/_original/findigs-client-api-openapi.yml
 - type: Blog
   url: https://www.findigs.com/blog
 - type: GitHubOrganization
