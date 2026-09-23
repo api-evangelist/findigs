@@ -1,0 +1,29 @@
+{
+  "provider": "findigs",
+  "sources": [
+    "_original/findigs-client-api-openapi.json"
+  ],
+  "outputs": [
+    "findigs-applications-api-openapi.yml",
+    "findigs-groups-api-openapi.yml",
+    "findigs-listings-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "1 archived document(s) dropped as subsets of other archived documents",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "findigs-client-api-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "findigs-client-api-openapi.json: declared missing tag: Applications",
+    "findigs-client-api-openapi.json: declared missing tag: Groups",
+    "findigs-client-api-openapi.json: declared missing tag: Listings",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "_original/findigs-client-api-openapi.yml: archived document superseded by a larger archived document",
+    "findigs-applications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "findigs-groups-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "findigs-listings-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}
