@@ -194,6 +194,72 @@ paths:
       - APIKeyHeader: []
 components:
   schemas:
+    ListingUpdate:
+      properties:
+        rent_amount:
+          type: number
+          minimum: 0.0
+          title: Rent Amount
+          description: Rent Amount in dollars (ex. 500.50)
+        date_available:
+          type: string
+          format: date
+          title: Date Available
+          description: Date the listing is available for move-in
+        status:
+          $ref: '#/components/schemas/ListingStatus'
+        address:
+          allOf:
+          - $ref: '#/components/schemas/ListingAddress'
+          title: Listing Address
+          description: Physical address of the listing
+      type: object
+      title: ListingUpdate
+      example:
+        rent_amount: '6969.69'
+        date_available: '2021-04-20'
+        status: LISTED
+        address:
+          address_line_1: 123 Fake St
+          city: Melber
+          state: KY
+          postal_code: '42069'
+      x-tags:
+      - listings
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Page:
+      properties:
+        items:
+          items: {}
+          type: array
+          title: Items
+        total:
+          type: integer
+          title: Total
+          default: 0
+        page:
+          type: integer
+          title: Page
+          default: 1
+        size:
+          type: integer
+          title: Size
+          default: 50
+        pages:
+          type: integer
+          title: Pages
+          default: 0
+      type: object
+      title: Page
+      description: Simple pagination class to replace fastapi-pagination.Page
     Listing:
       properties:
         rent_amount:
@@ -252,6 +318,44 @@ components:
           city: Melber
           state: KY
           postal_code: '42069'
+    ListingStatus:
+      type: string
+      enum:
+      - LISTED
+      - LOCKED
+      - CLOSED
+      title: ListingStatus
+      description: '* **LISTED**: Listing will appear in search and accept applications.
+
+        * **LOCKED**: Listing will not appear in search but will accept applications
+
+        * **CLOSED**: Listing will not appear in search or accept applications'
+    ListingAddressResult:
+      properties:
+        address_line_1:
+          type: string
+          title: Address Line 1
+        address_line_2:
+          type: string
+          title: Address Line 2
+        city:
+          type: string
+          title: City
+        state:
+          type: string
+          title: State
+        postal_code:
+          type: string
+          title: Postal Code
+      type: object
+      title: ListingAddressResult
+      example:
+        address_line_1: 123 Fake St
+        city: Melber
+        state: KY
+        postal_code: '42069'
+      x-tags:
+      - listings
     ValidationError:
       properties:
         loc:
@@ -273,72 +377,6 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    Page:
-      properties:
-        items:
-          items: {}
-          type: array
-          title: Items
-        total:
-          type: integer
-          title: Total
-          default: 0
-        page:
-          type: integer
-          title: Page
-          default: 1
-        size:
-          type: integer
-          title: Size
-          default: 50
-        pages:
-          type: integer
-          title: Pages
-          default: 0
-      type: object
-      title: Page
-      description: Simple pagination class to replace fastapi-pagination.Page
-    ListingUpdate:
-      properties:
-        rent_amount:
-          type: number
-          minimum: 0.0
-          title: Rent Amount
-          description: Rent Amount in dollars (ex. 500.50)
-        date_available:
-          type: string
-          format: date
-          title: Date Available
-          description: Date the listing is available for move-in
-        status:
-          $ref: '#/components/schemas/ListingStatus'
-        address:
-          allOf:
-          - $ref: '#/components/schemas/ListingAddress'
-          title: Listing Address
-          description: Physical address of the listing
-      type: object
-      title: ListingUpdate
-      example:
-        rent_amount: '6969.69'
-        date_available: '2021-04-20'
-        status: LISTED
-        address:
-          address_line_1: 123 Fake St
-          city: Melber
-          state: KY
-          postal_code: '42069'
-      x-tags:
-      - listings
     ListingAddress:
       properties:
         address_line_1:
@@ -411,44 +449,6 @@ components:
           city: Melber
           state: KY
           postal_code: '42069'
-      x-tags:
-      - listings
-    ListingStatus:
-      type: string
-      enum:
-      - LISTED
-      - LOCKED
-      - CLOSED
-      title: ListingStatus
-      description: '* **LISTED**: Listing will appear in search and accept applications.
-
-        * **LOCKED**: Listing will not appear in search but will accept applications
-
-        * **CLOSED**: Listing will not appear in search or accept applications'
-    ListingAddressResult:
-      properties:
-        address_line_1:
-          type: string
-          title: Address Line 1
-        address_line_2:
-          type: string
-          title: Address Line 2
-        city:
-          type: string
-          title: City
-        state:
-          type: string
-          title: State
-        postal_code:
-          type: string
-          title: Postal Code
-      type: object
-      title: ListingAddressResult
-      example:
-        address_line_1: 123 Fake St
-        city: Melber
-        state: KY
-        postal_code: '42069'
       x-tags:
       - listings
   securitySchemes:

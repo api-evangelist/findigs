@@ -56,9 +56,9 @@ tags:
 - Income Verification
 - Credit Check
 - Background Checks
-- Fraud Detection
+- Fraud Prevention
 - Property Management
-- Real-Estate
+- Real Estate
 - PropTech
 - FCRA
 - Fair Housing
@@ -81,6 +81,8 @@ tags_raw:
 - fcra
 - fair-housing
 - webhooks
+- Real-Estate
+- Fraud Detection
 apis:
 - aid: findigs:findigs-applications-api
   name: Findigs Applications API

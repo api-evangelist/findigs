@@ -118,124 +118,6 @@ paths:
       - APIKeyHeader: []
 components:
   schemas:
-    CreditReportData:
-      properties:
-        credit:
-          type: string
-          maxLength: 3
-          minLength: 3
-          pattern: ^[0-9]{3}$
-          title: Credit
-        criminal:
-          type: string
-          title: Criminal
-          description: A rating of applicants criminal history
-        eviction:
-          type: string
-          title: Eviction
-          description: A rating of applicants eviction history
-        cautions:
-          items:
-            type: string
-          type: array
-          title: Cautions
-          description: Human readable caution statements from applicants credit check
-      type: object
-      title: CreditReportData
-      example:
-        credit: '540'
-        criminal: Pass
-        eviction: Pass
-        cautions: []
-    ApplicationStatus:
-      type: string
-      enum:
-      - in_progress
-      - completed
-      - accepted
-      title: ApplicationStatus
-      description: An enumeration.
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    MandatoryDisclosures:
-      properties:
-        qBankruptcy:
-          type: boolean
-          title: Qbankruptcy
-          description: Have you filed for bankruptcy in the last 7 years?
-        qBreakLease:
-          type: boolean
-          title: Qbreaklease
-          description: Have you ever broken a lease or rental agreement?
-        qDamage:
-          type: boolean
-          title: Qdamage
-          description: Have you ever been sued for damages to a rental property?
-        qEvict:
-          type: boolean
-          title: Qevict
-          description: Have you ever been evicted or asked to move out of a rental?
-        qFelony:
-          type: boolean
-          title: Qfelony
-          description: Have you ever been convicted of a felony or sex-related crime?
-        qForeclosure:
-          type: boolean
-          title: Qforeclosure
-          description: Have you ever lost property in a foreclosure?
-        qNonPayment:
-          type: boolean
-          title: Qnonpayment
-          description: Have you ever been sued for non-payment of rent?
-        qOutstandingJudgements:
-          type: boolean
-          title: Qoutstandingjudgements
-          description: Do you have any outstanding judgments or collection accounts?
-        qRentersInsurance:
-          type: boolean
-          title: Qrentersinsurance
-          description: Do you have renter's insurance?
-        qSection8:
-          type: boolean
-          title: Qsection8
-          description: Are you applying as part of the Section 8 Program?
-        qSmoke:
-          type: boolean
-          title: Qsmoke
-          description: Are you a smoker?
-      type: object
-      title: MandatoryDisclosures
-      example:
-        qBankruptcy: false
-        qBreakLease: false
-        qDamage: false
-        qEvict: false
-        qFelony: false
-        qForeclosure: false
-        qNonPayment: false
-        qOutstandingJudgements: true
-        qRentersInsurance: false
-        qSection8: false
-        qSmoke: false
     HTTPValidationError:
       properties:
         detail:
@@ -245,77 +127,21 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    Page:
-      properties:
-        items:
-          items: {}
-          type: array
-          title: Items
-        total:
-          type: integer
-          title: Total
-          default: 0
-        page:
-          type: integer
-          title: Page
-          default: 1
-        size:
-          type: integer
-          title: Size
-          default: 50
-        pages:
-          type: integer
-          title: Pages
-          default: 0
-      type: object
-      title: Page
-      description: Simple pagination class to replace fastapi-pagination.Page
-    GroupStatus:
+    AncillaryQuestionType:
       type: string
       enum:
-      - incomplete
-      - submitted
-      - passed
-      - pending_review
-      - declined
-      - approved
-      - onboarded
-      - cancelled
-      title: GroupStatus
-      description: Enum of GroupStatus
-    SelfReportedData:
-      properties:
-        first_name:
-          type: string
-          title: First Name
-          description: Applicants self reported first name
-        last_name:
-          type: string
-          title: Last Name
-          description: Applicants self reported last name
-        email:
-          type: string
-          title: Email
-          description: Applicants login email, unverified
-        phone:
-          type: string
-          maxLength: 16
-          minLength: 1
-          pattern: ^\+?[1-9]?\d{1,14}$
-          title: Phone
-          description: Applicants 2FA phone number, verified
-      type: object
-      required:
-      - first_name
-      - last_name
-      - email
-      title: SelfReportedData
-      description: Data an applicant entered about themselves, varying levels of verified.
-      example:
-        first_name: Wernher
-        last_name: Braun
-        email: spaaaaace@nasa.gov
-        phone: '+4903012345678'
+      - yes-no
+      - file
+      - text
+      title: AncillaryQuestionType
+      description: 'A type of ancillary question
+
+
+        **YES_NO** - yes or no question type
+
+        **FILE** - file upload question type
+
+        **TEXT** - free text question type'
     EmploymentType:
       type: string
       enum:
@@ -352,42 +178,6 @@ components:
         **BENEFITS** - Receiving benefits
 
         **RETIRED** - Retired'
-    ApplicationType:
-      type: string
-      enum:
-      - applicant
-      - guarantor
-      title: ApplicationType
-      description: An enumeration.
-    CurrentEmploymentData:
-      properties:
-        type:
-          $ref: '#/components/schemas/EmploymentType'
-        income:
-          type: number
-          title: Income
-          description: Applicants gross monthly income, in dollars
-        company:
-          type: string
-          title: Company
-          description: Name of the company
-        position:
-          type: string
-          title: Position
-          description: Applicants position at the company
-        start_date:
-          type: string
-          format: date
-          title: Start Date
-          description: When the applicant started working with this company
-      type: object
-      title: CurrentEmploymentData
-      example:
-        type: employed
-        income: 1234.56
-        company: NASA
-        position: Rocket Scientist
-        start_date: '1960-04-01'
     Application:
       properties:
         listing_id:
@@ -496,6 +286,128 @@ components:
           qRentersInsurance: false
           qSection8: false
           qSmoke: false
+    MandatoryDisclosures:
+      properties:
+        qBankruptcy:
+          type: boolean
+          title: Qbankruptcy
+          description: Have you filed for bankruptcy in the last 7 years?
+        qBreakLease:
+          type: boolean
+          title: Qbreaklease
+          description: Have you ever broken a lease or rental agreement?
+        qDamage:
+          type: boolean
+          title: Qdamage
+          description: Have you ever been sued for damages to a rental property?
+        qEvict:
+          type: boolean
+          title: Qevict
+          description: Have you ever been evicted or asked to move out of a rental?
+        qFelony:
+          type: boolean
+          title: Qfelony
+          description: Have you ever been convicted of a felony or sex-related crime?
+        qForeclosure:
+          type: boolean
+          title: Qforeclosure
+          description: Have you ever lost property in a foreclosure?
+        qNonPayment:
+          type: boolean
+          title: Qnonpayment
+          description: Have you ever been sued for non-payment of rent?
+        qOutstandingJudgements:
+          type: boolean
+          title: Qoutstandingjudgements
+          description: Do you have any outstanding judgments or collection accounts?
+        qRentersInsurance:
+          type: boolean
+          title: Qrentersinsurance
+          description: Do you have renter's insurance?
+        qSection8:
+          type: boolean
+          title: Qsection8
+          description: Are you applying as part of the Section 8 Program?
+        qSmoke:
+          type: boolean
+          title: Qsmoke
+          description: Are you a smoker?
+      type: object
+      title: MandatoryDisclosures
+      example:
+        qBankruptcy: false
+        qBreakLease: false
+        qDamage: false
+        qEvict: false
+        qFelony: false
+        qForeclosure: false
+        qNonPayment: false
+        qOutstandingJudgements: true
+        qRentersInsurance: false
+        qSection8: false
+        qSmoke: false
+    ApplicationStatus:
+      type: string
+      enum:
+      - in_progress
+      - completed
+      - accepted
+      title: ApplicationStatus
+      description: An enumeration.
+    Page:
+      properties:
+        items:
+          items: {}
+          type: array
+          title: Items
+        total:
+          type: integer
+          title: Total
+          default: 0
+        page:
+          type: integer
+          title: Page
+          default: 1
+        size:
+          type: integer
+          title: Size
+          default: 50
+        pages:
+          type: integer
+          title: Pages
+          default: 0
+      type: object
+      title: Page
+      description: Simple pagination class to replace fastapi-pagination.Page
+    CurrentEmploymentData:
+      properties:
+        type:
+          $ref: '#/components/schemas/EmploymentType'
+        income:
+          type: number
+          title: Income
+          description: Applicants gross monthly income, in dollars
+        company:
+          type: string
+          title: Company
+          description: Name of the company
+        position:
+          type: string
+          title: Position
+          description: Applicants position at the company
+        start_date:
+          type: string
+          format: date
+          title: Start Date
+          description: When the applicant started working with this company
+      type: object
+      title: CurrentEmploymentData
+      example:
+        type: employed
+        income: 1234.56
+        company: NASA
+        position: Rocket Scientist
+        start_date: '1960-04-01'
     PetData:
       properties:
         age:
@@ -530,21 +442,96 @@ components:
         breed: Pug
         weight: 15
         is_service_animal: false
-    AncillaryQuestionType:
+    CreditReportData:
+      properties:
+        credit:
+          type: string
+          maxLength: 3
+          minLength: 3
+          pattern: ^[0-9]{3}$
+          title: Credit
+        criminal:
+          type: string
+          title: Criminal
+          description: A rating of applicants criminal history
+        eviction:
+          type: string
+          title: Eviction
+          description: A rating of applicants eviction history
+        cautions:
+          items:
+            type: string
+          type: array
+          title: Cautions
+          description: Human readable caution statements from applicants credit check
+      type: object
+      title: CreditReportData
+      example:
+        credit: '540'
+        criminal: Pass
+        eviction: Pass
+        cautions: []
+    ApplicationType:
       type: string
       enum:
-      - yes-no
-      - file
-      - text
-      title: AncillaryQuestionType
-      description: 'A type of ancillary question
-
-
-        **YES_NO** - yes or no question type
-
-        **FILE** - file upload question type
-
-        **TEXT** - free text question type'
+      - applicant
+      - guarantor
+      title: ApplicationType
+      description: An enumeration.
+    SelfReportedData:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+          description: Applicants self reported first name
+        last_name:
+          type: string
+          title: Last Name
+          description: Applicants self reported last name
+        email:
+          type: string
+          title: Email
+          description: Applicants login email, unverified
+        phone:
+          type: string
+          maxLength: 16
+          minLength: 1
+          pattern: ^\+?[1-9]?\d{1,14}$
+          title: Phone
+          description: Applicants 2FA phone number, verified
+      type: object
+      required:
+      - first_name
+      - last_name
+      - email
+      title: SelfReportedData
+      description: Data an applicant entered about themselves, varying levels of verified.
+      example:
+        first_name: Wernher
+        last_name: Braun
+        email: spaaaaace@nasa.gov
+        phone: '+4903012345678'
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     AncillaryQuestion:
       properties:
         response:
@@ -568,6 +555,19 @@ components:
         response: 'Yes'
         questionText: Test question text for ancillary question
         questionType: yes-no
+    GroupStatus:
+      type: string
+      enum:
+      - incomplete
+      - submitted
+      - passed
+      - pending_review
+      - declined
+      - approved
+      - onboarded
+      - cancelled
+      title: GroupStatus
+      description: Enum of GroupStatus
   securitySchemes:
     APIKeyHeader:
       type: apiKey
