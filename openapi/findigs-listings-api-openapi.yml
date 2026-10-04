@@ -194,77 +194,18 @@ paths:
       - APIKeyHeader: []
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ListingAddress:
-      properties:
-        address_line_1:
-          type: string
-          title: Address Line 1
-        address_line_2:
-          type: string
-          title: Address Line 2
-        city:
-          type: string
-          title: City
-        state:
-          type: string
-          maxLength: 2
-          minLength: 2
-          title: State
-          description: 2 letter ISO 3166-2 US subdivision code (part after the "US-")
-        postal_code:
-          type: string
-          maxLength: 10
-          minLength: 5
-          pattern: ^[0-9]{5}(?:-[0-9]{4})?$
-          title: Postal Code
-      type: object
-      required:
-      - address_line_1
-      - city
-      - state
-      - postal_code
-      title: ListingAddress
-      example:
-        address_line_1: 123 Fake St
-        city: Melber
-        state: KY
-        postal_code: '42069'
-      x-tags:
-      - listings
-    Page:
-      properties:
-        items:
-          items: {}
-          type: array
-          title: Items
-        total:
-          type: integer
-          title: Total
-          default: 0
-        page:
-          type: integer
-          title: Page
-          default: 1
-        size:
-          type: integer
-          title: Size
-          default: 50
-        pages:
-          type: integer
-          title: Pages
-          default: 0
-      type: object
-      title: Page
-      description: Simple pagination class to replace fastapi-pagination.Page
+    ListingStatus:
+      type: string
+      enum:
+      - LISTED
+      - LOCKED
+      - CLOSED
+      title: ListingStatus
+      description: '* **LISTED**: Listing will appear in search and accept applications.
+
+        * **LOCKED**: Listing will not appear in search but will accept applications
+
+        * **CLOSED**: Listing will not appear in search or accept applications'
     ValidationError:
       properties:
         loc:
@@ -286,18 +227,6 @@ components:
       - msg
       - type
       title: ValidationError
-    ListingStatus:
-      type: string
-      enum:
-      - LISTED
-      - LOCKED
-      - CLOSED
-      title: ListingStatus
-      description: '* **LISTED**: Listing will appear in search and accept applications.
-
-        * **LOCKED**: Listing will not appear in search but will accept applications
-
-        * **CLOSED**: Listing will not appear in search or accept applications'
     Listing:
       properties:
         rent_amount:
@@ -388,6 +317,31 @@ components:
           postal_code: '42069'
       x-tags:
       - listings
+    Page:
+      properties:
+        items:
+          items: {}
+          type: array
+          title: Items
+        total:
+          type: integer
+          title: Total
+          default: 0
+        page:
+          type: integer
+          title: Page
+          default: 1
+        size:
+          type: integer
+          title: Size
+          default: 50
+        pages:
+          type: integer
+          title: Pages
+          default: 0
+      type: object
+      title: Page
+      description: Simple pagination class to replace fastapi-pagination.Page
     ListingAddressResult:
       properties:
         address_line_1:
@@ -414,6 +368,52 @@ components:
         postal_code: '42069'
       x-tags:
       - listings
+    ListingAddress:
+      properties:
+        address_line_1:
+          type: string
+          title: Address Line 1
+        address_line_2:
+          type: string
+          title: Address Line 2
+        city:
+          type: string
+          title: City
+        state:
+          type: string
+          maxLength: 2
+          minLength: 2
+          title: State
+          description: 2 letter ISO 3166-2 US subdivision code (part after the "US-")
+        postal_code:
+          type: string
+          maxLength: 10
+          minLength: 5
+          pattern: ^[0-9]{5}(?:-[0-9]{4})?$
+          title: Postal Code
+      type: object
+      required:
+      - address_line_1
+      - city
+      - state
+      - postal_code
+      title: ListingAddress
+      example:
+        address_line_1: 123 Fake St
+        city: Melber
+        state: KY
+        postal_code: '42069'
+      x-tags:
+      - listings
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     ListingCreate:
       properties:
         rent_amount:

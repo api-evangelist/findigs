@@ -118,30 +118,6 @@ paths:
       - APIKeyHeader: []
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    AncillaryQuestionType:
-      type: string
-      enum:
-      - yes-no
-      - file
-      - text
-      title: AncillaryQuestionType
-      description: 'A type of ancillary question
-
-
-        **YES_NO** - yes or no question type
-
-        **FILE** - file upload question type
-
-        **TEXT** - free text question type'
     MandatoryDisclosures:
       properties:
         qBankruptcy:
@@ -202,31 +178,42 @@ components:
         qRentersInsurance: false
         qSection8: false
         qSmoke: false
-    Page:
+    ValidationError:
       properties:
-        items:
-          items: {}
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
           type: array
-          title: Items
-        total:
-          type: integer
-          title: Total
-          default: 0
-        page:
-          type: integer
-          title: Page
-          default: 1
-        size:
-          type: integer
-          title: Size
-          default: 50
-        pages:
-          type: integer
-          title: Pages
-          default: 0
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
       type: object
-      title: Page
-      description: Simple pagination class to replace fastapi-pagination.Page
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    AncillaryQuestionType:
+      type: string
+      enum:
+      - yes-no
+      - file
+      - text
+      title: AncillaryQuestionType
+      description: 'A type of ancillary question
+
+
+        **YES_NO** - yes or no question type
+
+        **FILE** - file upload question type
+
+        **TEXT** - free text question type'
     PetData:
       properties:
         age:
@@ -261,19 +248,13 @@ components:
         breed: Pug
         weight: 15
         is_service_animal: false
-    GroupStatus:
+    ApplicationType:
       type: string
       enum:
-      - incomplete
-      - submitted
-      - passed
-      - pending_review
-      - declined
-      - approved
-      - onboarded
-      - cancelled
-      title: GroupStatus
-      description: Enum of GroupStatus
+      - applicant
+      - guarantor
+      title: ApplicationType
+      description: An enumeration.
     AncillaryQuestion:
       properties:
         response:
@@ -297,100 +278,6 @@ components:
         response: 'Yes'
         questionText: Test question text for ancillary question
         questionType: yes-no
-    ApplicationType:
-      type: string
-      enum:
-      - applicant
-      - guarantor
-      title: ApplicationType
-      description: An enumeration.
-    CurrentEmploymentData:
-      properties:
-        type:
-          $ref: '#/components/schemas/EmploymentType'
-        income:
-          type: number
-          title: Income
-          description: Applicants gross monthly income, in dollars
-        company:
-          type: string
-          title: Company
-          description: Name of the company
-        position:
-          type: string
-          title: Position
-          description: Applicants position at the company
-        start_date:
-          type: string
-          format: date
-          title: Start Date
-          description: When the applicant started working with this company
-      type: object
-      title: CurrentEmploymentData
-      example:
-        type: employed
-        income: 1234.56
-        company: NASA
-        position: Rocket Scientist
-        start_date: '1960-04-01'
-    ApplicationStatus:
-      type: string
-      enum:
-      - in_progress
-      - completed
-      - accepted
-      title: ApplicationStatus
-      description: An enumeration.
-    CreditReportData:
-      properties:
-        credit:
-          type: string
-          maxLength: 3
-          minLength: 3
-          pattern: ^[0-9]{3}$
-          title: Credit
-        criminal:
-          type: string
-          title: Criminal
-          description: A rating of applicants criminal history
-        eviction:
-          type: string
-          title: Eviction
-          description: A rating of applicants eviction history
-        cautions:
-          items:
-            type: string
-          type: array
-          title: Cautions
-          description: Human readable caution statements from applicants credit check
-      type: object
-      title: CreditReportData
-      example:
-        credit: '540'
-        criminal: Pass
-        eviction: Pass
-        cautions: []
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     SelfReportedData:
       properties:
         first_name:
@@ -424,6 +311,31 @@ components:
         last_name: Braun
         email: spaaaaace@nasa.gov
         phone: '+4903012345678'
+    Page:
+      properties:
+        items:
+          items: {}
+          type: array
+          title: Items
+        total:
+          type: integer
+          title: Total
+          default: 0
+        page:
+          type: integer
+          title: Page
+          default: 1
+        size:
+          type: integer
+          title: Size
+          default: 50
+        pages:
+          type: integer
+          title: Pages
+          default: 0
+      type: object
+      title: Page
+      description: Simple pagination class to replace fastapi-pagination.Page
     Application:
       properties:
         listing_id:
@@ -568,6 +480,94 @@ components:
         **BENEFITS** - Receiving benefits
 
         **RETIRED** - Retired'
+    GroupStatus:
+      type: string
+      enum:
+      - incomplete
+      - submitted
+      - passed
+      - pending_review
+      - declined
+      - approved
+      - onboarded
+      - cancelled
+      title: GroupStatus
+      description: Enum of GroupStatus
+    CurrentEmploymentData:
+      properties:
+        type:
+          $ref: '#/components/schemas/EmploymentType'
+        income:
+          type: number
+          title: Income
+          description: Applicants gross monthly income, in dollars
+        company:
+          type: string
+          title: Company
+          description: Name of the company
+        position:
+          type: string
+          title: Position
+          description: Applicants position at the company
+        start_date:
+          type: string
+          format: date
+          title: Start Date
+          description: When the applicant started working with this company
+      type: object
+      title: CurrentEmploymentData
+      example:
+        type: employed
+        income: 1234.56
+        company: NASA
+        position: Rocket Scientist
+        start_date: '1960-04-01'
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ApplicationStatus:
+      type: string
+      enum:
+      - in_progress
+      - completed
+      - accepted
+      title: ApplicationStatus
+      description: An enumeration.
+    CreditReportData:
+      properties:
+        credit:
+          type: string
+          maxLength: 3
+          minLength: 3
+          pattern: ^[0-9]{3}$
+          title: Credit
+        criminal:
+          type: string
+          title: Criminal
+          description: A rating of applicants criminal history
+        eviction:
+          type: string
+          title: Eviction
+          description: A rating of applicants eviction history
+        cautions:
+          items:
+            type: string
+          type: array
+          title: Cautions
+          description: Human readable caution statements from applicants credit check
+      type: object
+      title: CreditReportData
+      example:
+        credit: '540'
+        criminal: Pass
+        eviction: Pass
+        cautions: []
   securitySchemes:
     APIKeyHeader:
       type: apiKey
