@@ -194,129 +194,6 @@ paths:
       - APIKeyHeader: []
 components:
   schemas:
-    ListingStatus:
-      type: string
-      enum:
-      - LISTED
-      - LOCKED
-      - CLOSED
-      title: ListingStatus
-      description: '* **LISTED**: Listing will appear in search and accept applications.
-
-        * **LOCKED**: Listing will not appear in search but will accept applications
-
-        * **CLOSED**: Listing will not appear in search or accept applications'
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    Listing:
-      properties:
-        rent_amount:
-          type: number
-          minimum: 0.0
-          title: Rent Amount
-          description: Rent Amount in dollars (ex. 500.50)
-        date_available:
-          type: string
-          format: date
-          title: Date Available
-          description: Date the listing is available for move-in
-        status:
-          $ref: '#/components/schemas/ListingStatus'
-        address:
-          $ref: '#/components/schemas/ListingAddressResult'
-        url:
-          type: string
-          maxLength: 65536
-          minLength: 1
-          format: uri
-          title: Listing URL
-          description: Direct URL to the listing application portal
-        id:
-          type: string
-          format: uuid
-          title: Id
-          description: Findigs internal id of the listing
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-        updated_at:
-          type: string
-          format: date-time
-          title: Updated At
-      type: object
-      required:
-      - status
-      - address
-      - url
-      - id
-      - created_at
-      - updated_at
-      title: Listing
-      example:
-        id: 98054c1b-79b1-4d87-a1ee-89e001bd86a7
-        url: https://yoursubdomain.findigs.com/apply/unitid=98054c1b-79b1-4d87-a1ee-89e001bd86a7
-        created_at: '2026-08-12T02:42:49.205840'
-        updated_at: '2026-08-12T02:42:49.205842'
-        rent_amount: '6969.69'
-        date_available: '2021-04-20'
-        status: LISTED
-        address:
-          address_line_1: 123 Fake St
-          city: Melber
-          state: KY
-          postal_code: '42069'
-    ListingUpdate:
-      properties:
-        rent_amount:
-          type: number
-          minimum: 0.0
-          title: Rent Amount
-          description: Rent Amount in dollars (ex. 500.50)
-        date_available:
-          type: string
-          format: date
-          title: Date Available
-          description: Date the listing is available for move-in
-        status:
-          $ref: '#/components/schemas/ListingStatus'
-        address:
-          allOf:
-          - $ref: '#/components/schemas/ListingAddress'
-          title: Listing Address
-          description: Physical address of the listing
-      type: object
-      title: ListingUpdate
-      example:
-        rent_amount: '6969.69'
-        date_available: '2021-04-20'
-        status: LISTED
-        address:
-          address_line_1: 123 Fake St
-          city: Melber
-          state: KY
-          postal_code: '42069'
-      x-tags:
-      - listings
     Page:
       properties:
         items:
@@ -368,6 +245,18 @@ components:
         postal_code: '42069'
       x-tags:
       - listings
+    ListingStatus:
+      type: string
+      enum:
+      - LISTED
+      - LOCKED
+      - CLOSED
+      title: ListingStatus
+      description: '* **LISTED**: Listing will appear in search and accept applications.
+
+        * **LOCKED**: Listing will not appear in search but will accept applications
+
+        * **CLOSED**: Listing will not appear in search or accept applications'
     ListingAddress:
       properties:
         address_line_1:
@@ -451,6 +340,117 @@ components:
           postal_code: '42069'
       x-tags:
       - listings
+    ListingUpdate:
+      properties:
+        rent_amount:
+          type: number
+          minimum: 0.0
+          title: Rent Amount
+          description: Rent Amount in dollars (ex. 500.50)
+        date_available:
+          type: string
+          format: date
+          title: Date Available
+          description: Date the listing is available for move-in
+        status:
+          $ref: '#/components/schemas/ListingStatus'
+        address:
+          allOf:
+          - $ref: '#/components/schemas/ListingAddress'
+          title: Listing Address
+          description: Physical address of the listing
+      type: object
+      title: ListingUpdate
+      example:
+        rent_amount: '6969.69'
+        date_available: '2021-04-20'
+        status: LISTED
+        address:
+          address_line_1: 123 Fake St
+          city: Melber
+          state: KY
+          postal_code: '42069'
+      x-tags:
+      - listings
+    Listing:
+      properties:
+        rent_amount:
+          type: number
+          minimum: 0.0
+          title: Rent Amount
+          description: Rent Amount in dollars (ex. 500.50)
+        date_available:
+          type: string
+          format: date
+          title: Date Available
+          description: Date the listing is available for move-in
+        status:
+          $ref: '#/components/schemas/ListingStatus'
+        address:
+          $ref: '#/components/schemas/ListingAddressResult'
+        url:
+          type: string
+          maxLength: 65536
+          minLength: 1
+          format: uri
+          title: Listing URL
+          description: Direct URL to the listing application portal
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Findigs internal id of the listing
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - status
+      - address
+      - url
+      - id
+      - created_at
+      - updated_at
+      title: Listing
+      example:
+        id: 98054c1b-79b1-4d87-a1ee-89e001bd86a7
+        url: https://yoursubdomain.findigs.com/apply/unitid=98054c1b-79b1-4d87-a1ee-89e001bd86a7
+        created_at: '2026-08-12T02:42:49.205840'
+        updated_at: '2026-08-12T02:42:49.205842'
+        rent_amount: '6969.69'
+        date_available: '2021-04-20'
+        status: LISTED
+        address:
+          address_line_1: 123 Fake St
+          city: Melber
+          state: KY
+          postal_code: '42069'
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
   securitySchemes:
     APIKeyHeader:
       type: apiKey

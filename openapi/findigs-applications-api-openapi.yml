@@ -178,139 +178,19 @@ components:
         qRentersInsurance: false
         qSection8: false
         qSmoke: false
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    AncillaryQuestionType:
+    GroupStatus:
       type: string
       enum:
-      - yes-no
-      - file
-      - text
-      title: AncillaryQuestionType
-      description: 'A type of ancillary question
-
-
-        **YES_NO** - yes or no question type
-
-        **FILE** - file upload question type
-
-        **TEXT** - free text question type'
-    PetData:
-      properties:
-        age:
-          type: number
-          minimum: 0.0
-          title: Age
-        type:
-          type: string
-          title: Type
-          description: What type of pet is it? (Dog, Cat, Rock)
-        breed:
-          type: string
-          title: Breed
-          description: Breed for the specific type, if applicable
-        weight:
-          type: number
-          minimum: 0.0
-          title: Weight
-        is_service_animal:
-          type: boolean
-          title: Is Service Animal
-          default: false
-      type: object
-      required:
-      - type
-      - breed
-      - weight
-      title: PetData
-      example:
-        age: 5
-        type: Dog
-        breed: Pug
-        weight: 15
-        is_service_animal: false
-    ApplicationType:
-      type: string
-      enum:
-      - applicant
-      - guarantor
-      title: ApplicationType
-      description: An enumeration.
-    AncillaryQuestion:
-      properties:
-        response:
-          type: string
-          title: Response
-          description: The response of an ancillary question.
-        questionText:
-          type: string
-          title: Questiontext
-          description: The question of an ancillary question.
-        questionType:
-          allOf:
-          - $ref: '#/components/schemas/AncillaryQuestionType'
-          description: The type for an ancillary question.
-      type: object
-      required:
-      - questionText
-      - questionType
-      title: AncillaryQuestion
-      example:
-        response: 'Yes'
-        questionText: Test question text for ancillary question
-        questionType: yes-no
-    SelfReportedData:
-      properties:
-        first_name:
-          type: string
-          title: First Name
-          description: Applicants self reported first name
-        last_name:
-          type: string
-          title: Last Name
-          description: Applicants self reported last name
-        email:
-          type: string
-          title: Email
-          description: Applicants login email, unverified
-        phone:
-          type: string
-          maxLength: 16
-          minLength: 1
-          pattern: ^\+?[1-9]?\d{1,14}$
-          title: Phone
-          description: Applicants 2FA phone number, verified
-      type: object
-      required:
-      - first_name
-      - last_name
-      - email
-      title: SelfReportedData
-      description: Data an applicant entered about themselves, varying levels of verified.
-      example:
-        first_name: Wernher
-        last_name: Braun
-        email: spaaaaace@nasa.gov
-        phone: '+4903012345678'
+      - incomplete
+      - submitted
+      - passed
+      - pending_review
+      - declined
+      - approved
+      - onboarded
+      - cancelled
+      title: GroupStatus
+      description: Enum of GroupStatus
     Page:
       properties:
         items:
@@ -336,6 +216,124 @@ components:
       type: object
       title: Page
       description: Simple pagination class to replace fastapi-pagination.Page
+    AncillaryQuestionType:
+      type: string
+      enum:
+      - yes-no
+      - file
+      - text
+      title: AncillaryQuestionType
+      description: 'A type of ancillary question
+
+
+        **YES_NO** - yes or no question type
+
+        **FILE** - file upload question type
+
+        **TEXT** - free text question type'
+    EmploymentType:
+      type: string
+      enum:
+      - employed
+      - offer
+      - offer_letter
+      - own
+      - self_employed
+      - student
+      - not
+      - other
+      - benefits
+      - retired
+      title: EmploymentType
+      description: 'A method of employment
+
+
+        **EMPLOYED** - Is currently employed
+
+        **OFFER** - Has an offer of employment
+
+        **OFFER_LETTER** - Has an offer letter
+
+        **OWN** - Owns their own business
+
+        **SELF_EMPLOYED** - Self employed
+
+        **STUDENT** - Student
+
+        **NOT** - Not employed
+
+        **OTHER** - Other employment type
+
+        **BENEFITS** - Receiving benefits
+
+        **RETIRED** - Retired'
+    ApplicationStatus:
+      type: string
+      enum:
+      - in_progress
+      - completed
+      - accepted
+      title: ApplicationStatus
+      description: An enumeration.
+    AncillaryQuestion:
+      properties:
+        response:
+          type: string
+          title: Response
+          description: The response of an ancillary question.
+        questionText:
+          type: string
+          title: Questiontext
+          description: The question of an ancillary question.
+        questionType:
+          allOf:
+          - $ref: '#/components/schemas/AncillaryQuestionType'
+          description: The type for an ancillary question.
+      type: object
+      required:
+      - questionText
+      - questionType
+      title: AncillaryQuestion
+      example:
+        response: 'Yes'
+        questionText: Test question text for ancillary question
+        questionType: yes-no
+    ApplicationType:
+      type: string
+      enum:
+      - applicant
+      - guarantor
+      title: ApplicationType
+      description: An enumeration.
+    CurrentEmploymentData:
+      properties:
+        type:
+          $ref: '#/components/schemas/EmploymentType'
+        income:
+          type: number
+          title: Income
+          description: Applicants gross monthly income, in dollars
+        company:
+          type: string
+          title: Company
+          description: Name of the company
+        position:
+          type: string
+          title: Position
+          description: Applicants position at the company
+        start_date:
+          type: string
+          format: date
+          title: Start Date
+          description: When the applicant started working with this company
+      type: object
+      title: CurrentEmploymentData
+      example:
+        type: employed
+        income: 1234.56
+        company: NASA
+        position: Rocket Scientist
+        start_date: '1960-04-01'
     Application:
       properties:
         listing_id:
@@ -444,84 +442,6 @@ components:
           qRentersInsurance: false
           qSection8: false
           qSmoke: false
-    EmploymentType:
-      type: string
-      enum:
-      - employed
-      - offer
-      - offer_letter
-      - own
-      - self_employed
-      - student
-      - not
-      - other
-      - benefits
-      - retired
-      title: EmploymentType
-      description: 'A method of employment
-
-
-        **EMPLOYED** - Is currently employed
-
-        **OFFER** - Has an offer of employment
-
-        **OFFER_LETTER** - Has an offer letter
-
-        **OWN** - Owns their own business
-
-        **SELF_EMPLOYED** - Self employed
-
-        **STUDENT** - Student
-
-        **NOT** - Not employed
-
-        **OTHER** - Other employment type
-
-        **BENEFITS** - Receiving benefits
-
-        **RETIRED** - Retired'
-    GroupStatus:
-      type: string
-      enum:
-      - incomplete
-      - submitted
-      - passed
-      - pending_review
-      - declined
-      - approved
-      - onboarded
-      - cancelled
-      title: GroupStatus
-      description: Enum of GroupStatus
-    CurrentEmploymentData:
-      properties:
-        type:
-          $ref: '#/components/schemas/EmploymentType'
-        income:
-          type: number
-          title: Income
-          description: Applicants gross monthly income, in dollars
-        company:
-          type: string
-          title: Company
-          description: Name of the company
-        position:
-          type: string
-          title: Position
-          description: Applicants position at the company
-        start_date:
-          type: string
-          format: date
-          title: Start Date
-          description: When the applicant started working with this company
-      type: object
-      title: CurrentEmploymentData
-      example:
-        type: employed
-        income: 1234.56
-        company: NASA
-        position: Rocket Scientist
-        start_date: '1960-04-01'
     HTTPValidationError:
       properties:
         detail:
@@ -531,14 +451,73 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    ApplicationStatus:
-      type: string
-      enum:
-      - in_progress
-      - completed
-      - accepted
-      title: ApplicationStatus
-      description: An enumeration.
+    SelfReportedData:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+          description: Applicants self reported first name
+        last_name:
+          type: string
+          title: Last Name
+          description: Applicants self reported last name
+        email:
+          type: string
+          title: Email
+          description: Applicants login email, unverified
+        phone:
+          type: string
+          maxLength: 16
+          minLength: 1
+          pattern: ^\+?[1-9]?\d{1,14}$
+          title: Phone
+          description: Applicants 2FA phone number, verified
+      type: object
+      required:
+      - first_name
+      - last_name
+      - email
+      title: SelfReportedData
+      description: Data an applicant entered about themselves, varying levels of verified.
+      example:
+        first_name: Wernher
+        last_name: Braun
+        email: spaaaaace@nasa.gov
+        phone: '+4903012345678'
+    PetData:
+      properties:
+        age:
+          type: number
+          minimum: 0.0
+          title: Age
+        type:
+          type: string
+          title: Type
+          description: What type of pet is it? (Dog, Cat, Rock)
+        breed:
+          type: string
+          title: Breed
+          description: Breed for the specific type, if applicable
+        weight:
+          type: number
+          minimum: 0.0
+          title: Weight
+        is_service_animal:
+          type: boolean
+          title: Is Service Animal
+          default: false
+      type: object
+      required:
+      - type
+      - breed
+      - weight
+      title: PetData
+      example:
+        age: 5
+        type: Dog
+        breed: Pug
+        weight: 15
+        is_service_animal: false
     CreditReportData:
       properties:
         credit:
@@ -568,6 +547,27 @@ components:
         criminal: Pass
         eviction: Pass
         cautions: []
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
   securitySchemes:
     APIKeyHeader:
       type: apiKey
