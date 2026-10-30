@@ -64,5 +64,141 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Findigs is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://www.nasdaqprivatemarket.com/
+Findigs is a New York City based residential real estate decisioning platform that screens rental applicants for identity, income, employment, credit, criminal history, eviction records, documents and pets, then applies automated underwriting against each operator's own written policy criteria to render a full yes/no decision on every rental application rather than handing back raw screening reports. The platform spans screening, underwriting, policy optimization and post-lease performance data, is backed by a contractual fraud guarantee, and reports a median decision time of 3.4 hours across 400K+ rental units. Findigs publishes a machine-readable Client API — an OpenAPI 3.1.0 contract served from api.client.findigs.com covering listings, applications and applicant groups, authenticated with a scoped X-API-KEY header and paired with a sandbox environment and a terse webhook event surface — though the company states the Client API is closed to new clients and existing integrators should contact integrations@findigs.com.
+
+**Areas:** rental-screening · Tenant Screening · resident-screening · rental-application · Underwriting · Decisioning · Identity Verification · Income Verification · Credit Check · Background Checks · Fraud Prevention · Property Management
+
+## Findigs on APIs.io
+
+Everything profiled for Findigs is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/findigs/](https://apis.io/providers/findigs/)** — or go straight to one of the APIs or properties below.
+
+### APIs (3)
+
+- [Findigs Applications API](https://apis.io/apis/findigs/findigs-applications-api/) — The Applications API from Findigs — 2 operation(s) for applications.
+- [Findigs Groups API](https://apis.io/apis/findigs/findigs-groups-api/) — The Groups API from Findigs — 2 operation(s) for groups.
+- [Findigs Listings API](https://apis.io/apis/findigs/findigs-listings-api/) — The Listings API from Findigs — 2 operation(s) for listings.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Findigs Webhooks](https://apis.io/asyncapis/findigs/findigs-webhooks/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [findigs-mcp.yml](https://apis.io/servers/findigs/findigs-mcp-yml/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Findigs Agentic Access](https://apis.io/agentic-access/findigs/findigs-agentic-access/)
+
+#### Collections (2)
+
+Postman and Open Collection request collections.
+
+- [Findigs Client API](https://apis.io/collections/findigs/open-findigs-client-api/)
+- [Findigs Client API](https://apis.io/collections/findigs/postman-findigs-client-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Findigs Client Api Overlay](https://apis.io/overlays/findigs/findigs-client-api-overlay/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Findigs Authentication](https://apis.io/security/findigs/findigs-authentication/)
+- [Findigs Domain Security](https://apis.io/security/findigs/findigs-domain-security/)
+- [Findigs Vulnerability Disclosure](https://apis.io/security/findigs/findigs-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Findigs Plans Pricing](https://apis.io/plans/findigs/findigs-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Findigs Rate Limits](https://apis.io/rate-limits/findigs/findigs-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.findigs.com/)
+- [Documentation](https://docs.getfindigs.com/)
+- [API reference](https://docs.getfindigs.com/)
+- [Pricing](https://www.findigs.com/pricing)
+- [Support](https://www.findigs.com/renters)
+- [Blog](https://www.findigs.com/blog)
+- [Security](https://www.findigs.com/legal/responsible-disclosure-policy)
+- [Terms of service](https://www.findigs.com/legal/terms-of-use)
+- [Privacy policy](https://www.findigs.com/legal/privacy-policy)
+- [GitHub](https://github.com/Findigs)
+
+## API Evangelist rating
+
+**Kin Score 52.9** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 60.3 |
+| Contract governance | 4.5 |
+| Operational transparency | 21.1 |
+| Developer ergonomics | 58.9 |
+| Access clarity | 69.7 |
+
+**Agent readiness 35.7** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | documented (partial credit) |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | paginated |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 31.6** — Insurance
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/findigs/](https://apis.io/providers/findigs/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Findigs: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/findigs/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
